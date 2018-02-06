@@ -1,0 +1,14 @@
+package model;
+
+public abstract class test {
+
+	public static void main(String[] args) {
+		boolean testt = true;
+		long i;
+		if(!(i > 0)) {
+			testt = false;
+		}
+
+	}
+
+}

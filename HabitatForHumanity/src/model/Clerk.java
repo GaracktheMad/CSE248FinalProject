@@ -1,5 +1,5 @@
 package model;
 
-public class Clerk {
+public class Clerk extends User {
 
 }

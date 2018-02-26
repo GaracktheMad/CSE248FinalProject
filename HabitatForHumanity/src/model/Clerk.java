@@ -1,5 +1,5 @@
 package model;
 
-public class Clerk extends User {
-
+public interface Clerk {
+	public boolean isClerk();
 }

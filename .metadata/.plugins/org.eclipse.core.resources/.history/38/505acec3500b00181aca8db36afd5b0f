@@ -1,9 +1,0 @@
-package model;
-
-import java.io.Serializable;
-import java.util.HashMap;
-
-public class Inventory implements Serializable{
-	private HashMap<Item, Long> data;
-
-}

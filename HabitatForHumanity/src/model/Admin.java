@@ -1,5 +1,6 @@
 package model;
 
-public class Admin extends Clerk {
+public interface Admin {
+	public boolean isAdmin();
 
 }

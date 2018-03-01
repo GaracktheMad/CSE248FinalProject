@@ -1,34 +1,45 @@
 package model;
 
-public class User implements Admin, Clerk {
+public abstract class User {
 	private String email;
-	private String id;
-	private static long idNum = 0;
+	private Identity id;
+	private static int idNum = 0;
 	private String password;
-	private Rank rank;
+	
+	User(String em, String pass, String classifier){
+		email = em;
+		password = pass;
+		id = new Identity(classifier ,idNum++);
+	}
 	
 	
-	
-	private void genID() {
-		id = String.format("%s#%19d", email.substring(0,6), ++idNum);
+	public String getEmail() {
+		return email;
 	}
 
-	public String getId() {
-		return id;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-
-	@Override
-	public boolean isClerk() {
-		if(rank == ) {
+	
+	public boolean verifyPass(String attempt) {
+		if(attempt.equals(password)) {
 			return true;
 		}
 		return false;
 	}
 
-	@Override
-	public boolean isAdmin() {
-		// TODO Auto-generated method stub
-		return false;
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
+	
+	public Identity getKey() {
+		return id;
+	}
+	
+	public String getID() {
+		return id.toString();
+	}
+	
 
 }

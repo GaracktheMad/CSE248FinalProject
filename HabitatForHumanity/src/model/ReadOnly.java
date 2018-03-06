@@ -4,7 +4,12 @@ package model;
 public class ReadOnly extends User implements ReadOnlyPrivs{
 	ReadOnly(String em, String pass) {
 		super(em, pass, "U");
-		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public String[] details() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

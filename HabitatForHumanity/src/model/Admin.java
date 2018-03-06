@@ -7,7 +7,13 @@ public class Admin extends User implements ClerkPrivs, AdminPrivs, ReadOnlyPrivs
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public String[] details() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-		
+
+
 
 }

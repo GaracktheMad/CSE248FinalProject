@@ -7,4 +7,10 @@ public class Clerk extends User implements ReadOnlyPrivs, ClerkPrivs{
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public String[] details() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

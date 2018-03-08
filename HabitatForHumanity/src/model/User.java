@@ -2,7 +2,7 @@ package model;
 
 public abstract class User implements Stringable {
 	private String email;
-	private Identity id;
+	private final Identity id;
 	private static int idNum = 0;
 	private String password;
 
@@ -34,7 +34,7 @@ public abstract class User implements Stringable {
 		return false;
 	}
 
-	protected String getPassword(){
+	String getPassword(){
 		return password;
 	}
 

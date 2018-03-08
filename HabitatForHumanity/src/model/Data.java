@@ -1,27 +1,61 @@
 package model;
 
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class Data {
-	private static HashMap <Identity, User> users = new HashMap<Identity, User>();
-	private static HashMap <Identity, Item> items = new HashMap<Identity, Item>();
+	private final static HashMap<Identity, User> users = new HashMap<Identity, User>();
+	private final static HashMap<Identity, Item> items = new HashMap<Identity, Item>();
 
-	public static void addUser(User u){
+	static void addUser(User u) {
 		users.put(u.getKey(), u);
 	}
-	public static void addItem(Item i){
+
+	static void addItem(Item i) {
 		items.put(i.getKey(), i);
 	}
-	public static void removeItem(Item i){
+
+	static void removeItem(Item i) {
 		items.remove(i.getKey());
 	}
-	public static void removeUser(User u){
+
+	static void removeUser(User u) {
 		users.remove(u.getKey());
 	}
-	public static void editUser(User old, User updated){
-		User u = new User(updated.getEmail(), updated.getPassword(), old.getKey());
-		users.replace(old.getKey(), old, u);
+
+	static boolean editUser(User old, User updated) {
+		if (updated.getClass() == Admin.class) {
+			return users.replace(old.getKey(), old, new Admin(updated.getEmail(), updated.getPassword(), old.getKey()));
+		}
+		if (updated.getClass() == ReadOnly.class) {
+			return users.replace(old.getKey(), old,
+					new ReadOnly(updated.getEmail(), updated.getPassword(), old.getKey()));
+		}
+		if (updated.getClass() == Clerk.class) {
+			return users.replace(old.getKey(), old, new Clerk(updated.getEmail(), updated.getPassword(), old.getKey()));
+		}
+		return false;
 	}
 
+	static boolean editItem(Item old, Item updated) {
+		return items.replace(old.getKey(), old,
+				new Item(updated.getName(), updated.getPrice(), updated.getDonator(), old.getKey()));
+	}
+
+	static User getUser(Identity key) {
+		return users.get(key);
+	}
+
+	static Item getItem(Identity key) {
+		return items.get(key);
+	}
+
+	static Iterator<Identity> getItemKeys() {
+		return items.keySet().iterator();
+	}
+
+	static Iterator<Identity> getUserKeys() {
+		return users.keySet().iterator();
+	}
 
 }

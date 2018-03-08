@@ -6,14 +6,14 @@ public class Identity {
 	
 	public Identity(String classification, int serial) {
 		super();
-		this.classification = classification;
+		this.classification = classification.toUpperCase();
 		this.serial = serial;
 	}
 	public String getClassification() {
 		return classification;
 	}
 	public void setClassification(String classification) {
-		this.classification = classification;
+		this.classification = classification.toUpperCase();
 	}
 	@Override
 	public String toString() {

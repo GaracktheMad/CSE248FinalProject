@@ -1,9 +1,11 @@
 package model;
 
-
 public class ReadOnly extends User implements ReadOnlyPrivs{
-	ReadOnly(String em, String pass) {
+	public ReadOnly(String em, String pass) {
 		super(em, pass, "U");
+	}
+	protected ReadOnly(String email, String password, Identity key) {
+		super(email, password, key);
 	}
 
 	@Override

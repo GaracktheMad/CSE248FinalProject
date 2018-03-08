@@ -7,7 +7,7 @@ public class Item implements Serializable, Stringable {
 	private static final long serialVersionUID = -3775776854105022190L;
 	private String name;
 	private double price;
-	private Identity id;
+	private final Identity id;
 	private static int idCount = 0;
 	private Source donator;
 
@@ -16,6 +16,20 @@ public class Item implements Serializable, Stringable {
 		this.name = name;
 		id = new Identity("i", ++idCount);
 
+	}
+	protected Item(String n, double p, Source s, Identity i) {
+		name = n;
+		price = p;
+		id = i;
+		donator = s;
+	}
+	
+	public Item(Item i) {
+		super();
+		this.name = i.getName();
+		price = i.getPrice();
+		donator = i.getDonator();
+		id = new Identity("i", ++idCount);
 	}
 
 	public double getPrice() {

@@ -15,12 +15,18 @@ public class Data {
 		items.put(i.getKey(), i);
 	}
 
-	static void removeItem(Item i) {
-		items.remove(i.getKey());
+	static boolean removeItem(Identity i) {
+		if (items.remove(i) == null) {
+			return false;
+		}
+		return true;
 	}
 
-	static void removeUser(User u) {
-		users.remove(u.getKey());
+	static boolean removeUser(Identity i) {
+		if (users.remove(i) == null) {
+			return false;
+		}
+		return true;
 	}
 
 	static boolean editUser(User old, User updated) {

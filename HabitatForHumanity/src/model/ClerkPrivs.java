@@ -22,5 +22,8 @@ public interface ClerkPrivs {
 		updated.setPrice(p);
 		Data.editItem(old, updated);
 	}
+	public default boolean removeItem(Identity key) {
+		return Data.removeItem(key);
+	}
 
 }

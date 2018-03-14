@@ -1,20 +1,22 @@
 package model;
 
-public class Clerk extends User implements ReadOnlyPrivs, ClerkPrivs{
+import java.util.ArrayList;
 
-	Clerk(String em, String pass) {
+public class Clerk extends User implements ReadOnlyPrivs, ClerkPrivs {
+
+	public Clerk(String em, String pass) {
 		super(em, pass, "C");
-		// TODO Auto-generated constructor stub
 	}
 
-	protected Clerk(String email, String password, Identity key) {
-		super(email, password, key);
+	protected Clerk(User c, Identity key) {
+		super(c.getEmail(), c.getPassword(), key);
 	}
 
 	@Override
-	public String[] details() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<String> details() {
+		ArrayList<String> x = preDetails();
+		x.add("Clerk");
+		return x;
 	}
 
 }

@@ -2,28 +2,39 @@ package model;
 
 public interface ClerkPrivs {
 	public default void createItem(Item i) {
-		Data.addItem(i);
+		Data.addItem(new Item(i, i.getKey()));
 	}
-	public default void changeName(Identity key, String name ) {
-		Item old = Data.getItem(key);
-		Item updated = new Item(old);
-		updated.setName(name);
-		Data.editItem(old, updated);
+
+	public default boolean changeName(Identity key, String name) {
+		if (Data.checkItemKey(key) == false) {
+			return false;
+		}
+		Data.getItem(key).setName(name);
+		return true;
 	}
-	public default void changeSource(Identity key, Source s ) {
-		Item old = Data.getItem(key);
-		Item updated = new Item(old);
-		updated.setDonator(s);
-		Data.editItem(old, updated);
+
+	public default boolean changeSource(Identity key, Source s) {
+		if (Data.checkItemKey(key) == false) {
+			return false;
+		}
+		Data.getItem(key).setDonator(s);
+		return true;
 	}
-	public default void changePrice(Identity key, double p ) {
-		Item old = Data.getItem(key);
-		Item updated = new Item(old);
-		updated.setPrice(p);
-		Data.editItem(old, updated);
+
+	public default boolean changePrice(Identity key, double p) {
+		if (Data.checkItemKey(key) == false) {
+			return false;
+		}
+		Data.getItem(key).setPrice(p);
+		return true;
 	}
+
 	public default boolean removeItem(Identity key) {
 		return Data.removeItem(key);
+	}
+
+	public default Item getItem(Identity key) {
+		return new Item(Data.getItem(key), key);
 	}
 
 }

@@ -1,18 +1,21 @@
 package model;
 
-public class ReadOnly extends User implements ReadOnlyPrivs{
+import java.util.ArrayList;
+
+public class ReadOnly extends User implements ReadOnlyPrivs {
 	public ReadOnly(String em, String pass) {
 		super(em, pass, "U");
 	}
-	protected ReadOnly(String email, String password, Identity key) {
-		super(email, password, key);
+
+	protected ReadOnly(User r, Identity key) {
+		super(r.getEmail(), r.getPassword(), key);
 	}
 
 	@Override
-	public String[] details() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<String> details() {
+		ArrayList<String> x = preDetails();
+		x.add("ReadOnly");
+		return x;
 	}
-
 
 }

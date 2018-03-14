@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Item implements Serializable, Stringable {
 
@@ -17,19 +18,21 @@ public class Item implements Serializable, Stringable {
 		id = new Identity("i", ++idCount);
 
 	}
-	protected Item(String n, double p, Source s, Identity i) {
-		name = n;
-		price = p;
-		id = i;
-		donator = s;
-	}
-	
+
 	public Item(Item i) {
 		super();
 		this.name = i.getName();
 		price = i.getPrice();
 		donator = i.getDonator();
 		id = new Identity("i", ++idCount);
+	}
+
+	protected Item(Item item, Identity i) {
+		super();
+		this.name = item.getName();
+		price = item.getPrice();
+		donator = item.getDonator();
+		id = i;
 	}
 
 	public double getPrice() {
@@ -64,14 +67,11 @@ public class Item implements Serializable, Stringable {
 		return id.toString();
 	}
 
-	public String[] details() {
-		String[] y = donator.details();
-		String[] x = new String[2 + y.length];
-		x[0] = name;
-		x[1] = String.valueOf(price);
-		for(int i = 2; i < y.length; i++){
-				x[i] = y[i - 2];
-		}
+	public ArrayList<String> details() {
+		ArrayList<String> x = new ArrayList<String>();
+		x.add(name);
+		x.add(String.valueOf(price));
+		x.addAll(donator.details());
 		return x;
 	}
 }

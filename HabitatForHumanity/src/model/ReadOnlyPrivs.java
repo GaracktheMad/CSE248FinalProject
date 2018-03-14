@@ -4,14 +4,15 @@ import java.util.Iterator;
 import java.util.Stack;
 
 public interface ReadOnlyPrivs {
-	public default Stack<Item> listAll() {
-		Iterator<Identity> keys = Data.getItemKeys();
+
+	public default Stack<Item> listAllItems() {
+		Iterator<Identity> keys = Data.getUserKeys();
 		Stack<Item> list = new Stack<Item>();
-		while(keys.hasNext()) {
-			list.push(Data.getItem(keys.next()));
+		while (keys.hasNext()) {
+			Identity next = keys.next();
+			list.push(new Item(Data.getItem(next), next));
 		}
 		return list;
 	}
-
 
 }

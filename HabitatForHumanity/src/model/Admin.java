@@ -1,23 +1,22 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Admin extends User implements ClerkPrivs, AdminPrivs, ReadOnlyPrivs {
 
-	Admin(String em, String pass) {
+	public Admin(String em, String pass) {
 		super(em, pass, "A");
-		// TODO Auto-generated constructor stub
 	}
 
-	protected Admin(String email, String password, Identity key) {
-		super(email, password, key);
+	protected Admin(User a, Identity key) {
+		super(a.getEmail(), a.getPassword(), key);
 	}
 
 	@Override
-	public String[] details() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<String> details() {
+		ArrayList<String> x = preDetails();
+		x.add("Admin");
+		return x;
 	}
-
-
-
 
 }

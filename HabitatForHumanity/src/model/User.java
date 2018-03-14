@@ -1,23 +1,24 @@
 package model;
 
+import java.util.ArrayList;
+
 public abstract class User implements Stringable {
 	private String email;
 	private final Identity id;
 	private static int idNum = 0;
 	private String password;
 
-	public User(String em, String pass, String classifier){
+	public User(String em, String pass, String classifier) {
 		email = em;
 		password = pass;
-		id = new Identity(classifier ,idNum++);
+		id = new Identity(classifier, idNum++);
 	}
 
-	protected User(String em, String pass, Identity i){
+	protected User(String em, String pass, Identity i) {
 		email = em;
 		password = pass;
 		id = i;
 	}
-
 
 	public String getEmail() {
 		return email;
@@ -28,16 +29,15 @@ public abstract class User implements Stringable {
 	}
 
 	public boolean verifyPass(String attempt) {
-		if(attempt.equals(password)) {
+		if (attempt.equals(password)) {
 			return true;
 		}
 		return false;
 	}
 
-	String getPassword(){
+	String getPassword() {
 		return password;
 	}
-
 
 	public void setPassword(String password) {
 		this.password = password;
@@ -51,5 +51,11 @@ public abstract class User implements Stringable {
 		return id.toString();
 	}
 
+	protected ArrayList<String> preDetails() {
+		ArrayList<String> x = new ArrayList<String>();
+		x.add(id.toString());
+		x.add(email);
+		return x;
+	}
 
 }

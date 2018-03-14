@@ -29,25 +29,6 @@ public class Data {
 		return true;
 	}
 
-	static boolean editUser(User old, User updated) {
-		if (updated.getClass() == Admin.class) {
-			return users.replace(old.getKey(), old, new Admin(updated.getEmail(), updated.getPassword(), old.getKey()));
-		}
-		if (updated.getClass() == ReadOnly.class) {
-			return users.replace(old.getKey(), old,
-					new ReadOnly(updated.getEmail(), updated.getPassword(), old.getKey()));
-		}
-		if (updated.getClass() == Clerk.class) {
-			return users.replace(old.getKey(), old, new Clerk(updated.getEmail(), updated.getPassword(), old.getKey()));
-		}
-		return false;
-	}
-
-	static boolean editItem(Item old, Item updated) {
-		return items.replace(old.getKey(), old,
-				new Item(updated.getName(), updated.getPrice(), updated.getDonator(), old.getKey()));
-	}
-
 	static User getUser(Identity key) {
 		return users.get(key);
 	}
@@ -56,12 +37,20 @@ public class Data {
 		return items.get(key);
 	}
 
-	static Iterator<Identity> getItemKeys() {
+	public static Iterator<Identity> getItemKeys() {
 		return items.keySet().iterator();
 	}
 
-	static Iterator<Identity> getUserKeys() {
+	public static Iterator<Identity> getUserKeys() {
 		return users.keySet().iterator();
+	}
+
+	public static boolean checkUserKey(Identity key) {
+		return users.containsKey(key);
+	}
+
+	public static boolean checkItemKey(Identity key) {
+		return items.containsKey(key);
 	}
 
 }

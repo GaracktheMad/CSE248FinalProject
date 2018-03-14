@@ -1,6 +1,8 @@
 package model;
 
+import java.util.ArrayList;
+
 public interface Stringable {
-	public String[] details();
+	public ArrayList<String> details();
 
 }

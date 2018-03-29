@@ -1,7 +1,7 @@
 package model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.Stack;
 
 public class Item implements Serializable, Stringable {
 
@@ -9,13 +9,13 @@ public class Item implements Serializable, Stringable {
 	private String name;
 	private double price;
 	private final Identity id;
-	private static int idCount = 0;
+	private static int idNum = 0;
 	private Source donator;
 
 	public Item(String name) {
 		super();
 		this.name = name;
-		id = new Identity("i", ++idCount);
+		id = new Identity("i", ++idNum);
 
 	}
 
@@ -24,7 +24,7 @@ public class Item implements Serializable, Stringable {
 		this.name = i.getName();
 		price = i.getPrice();
 		donator = i.getDonator();
-		id = new Identity("i", ++idCount);
+		id = new Identity("i", ++idNum);
 	}
 
 	protected Item(Item item, Identity i) {
@@ -67,11 +67,22 @@ public class Item implements Serializable, Stringable {
 		return id.toString();
 	}
 
-	public ArrayList<String> details() {
-		ArrayList<String> x = new ArrayList<String>();
-		x.add(name);
-		x.add(String.valueOf(price));
-		x.addAll(donator.details());
+	@Override
+	/**
+	 * @return Stack with donator stack on bottom, then price, then name
+	 */
+	public Stack<String> details() {
+		Stack<String> x = donator.details();
+		x.push(String.valueOf(price));
+		x.push(name);
 		return x;
+	}
+
+	static int getCounterState() {
+		return idNum;
+	}
+
+	static void setCounterState(int i) {
+		idNum = i;
 	}
 }

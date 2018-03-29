@@ -1,6 +1,6 @@
 package model;
 
-import java.util.ArrayList;
+import java.util.Stack;
 
 public class Admin extends User implements ClerkPrivs, AdminPrivs, ReadOnlyPrivs {
 
@@ -12,10 +12,14 @@ public class Admin extends User implements ClerkPrivs, AdminPrivs, ReadOnlyPrivs
 		super(a.getEmail(), a.getPassword(), key);
 	}
 
+	/**
+	 * @see model.User#preDetails()
+	 * @return Stack with predetails on bottom with "Admin" at top
+	 */
 	@Override
-	public ArrayList<String> details() {
-		ArrayList<String> x = preDetails();
-		x.add("Admin");
+	public Stack<String> details() {
+		Stack<String> x = preDetails();
+		x.push("Admin");
 		return x;
 	}
 

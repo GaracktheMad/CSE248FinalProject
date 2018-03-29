@@ -1,7 +1,7 @@
 package model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.Stack;
 
 public class Source implements Serializable, Stringable {
 
@@ -42,12 +42,15 @@ public class Source implements Serializable, Stringable {
 		this.contact = contact;
 	}
 
+	/**
+	 * @return Stack with name at bottom, then address, then phone number
+	 */
 	@Override
-	public ArrayList<String> details() {
-		ArrayList<String> x = new ArrayList<String>();
-		x.add(name);
-		x.add(address);
-		x.add(contact.toString());
+	public Stack<String> details() {
+		Stack<String> x = new Stack<String>();
+		x.push(name);
+		x.push(address);
+		x.push(contact.toString());
 		return x;
 	}
 

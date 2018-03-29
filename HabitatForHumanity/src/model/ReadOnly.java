@@ -1,6 +1,6 @@
 package model;
 
-import java.util.ArrayList;
+import java.util.Stack;
 
 public class ReadOnly extends User implements ReadOnlyPrivs {
 	public ReadOnly(String em, String pass) {
@@ -11,10 +11,14 @@ public class ReadOnly extends User implements ReadOnlyPrivs {
 		super(r.getEmail(), r.getPassword(), key);
 	}
 
+	/**
+	 * @see model.User#preDetails()
+	 * @return Stack with predetails on bottom with "ReadOnly" at top
+	 */
 	@Override
-	public ArrayList<String> details() {
-		ArrayList<String> x = preDetails();
-		x.add("ReadOnly");
+	public Stack<String> details() {
+		Stack<String> x = preDetails();
+		x.push("ReadOnly");
 		return x;
 	}
 

@@ -1,6 +1,6 @@
 package model;
 
-import java.util.ArrayList;
+import java.util.Stack;
 
 public abstract class User implements Stringable {
 	private String email;
@@ -51,11 +51,23 @@ public abstract class User implements Stringable {
 		return id.toString();
 	}
 
-	protected ArrayList<String> preDetails() {
-		ArrayList<String> x = new ArrayList<String>();
-		x.add(id.toString());
-		x.add(email);
+	/**
+	 * 
+	 * @return Stack with id at bottom then email
+	 */
+	protected Stack<String> preDetails() {
+		Stack<String> x = new Stack<String>();
+		x.push(id.toString());
+		x.push(email);
 		return x;
+	}
+
+	static int getCounterState() {
+		return idNum;
+	}
+
+	static void setCounterState(int i) {
+		idNum = i;
 	}
 
 }

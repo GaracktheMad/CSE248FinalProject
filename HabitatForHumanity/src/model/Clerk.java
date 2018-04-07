@@ -4,6 +4,11 @@ import java.util.Stack;
 
 public class Clerk extends User implements ReadOnlyPrivs, ClerkPrivs {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1942255796168243014L;
+
 	public Clerk(String em, String pass) {
 		super(em, pass, "C");
 	}

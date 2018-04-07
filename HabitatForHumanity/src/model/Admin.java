@@ -4,6 +4,11 @@ import java.util.Stack;
 
 public class Admin extends User implements ClerkPrivs, AdminPrivs, ReadOnlyPrivs {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2384896244769850210L;
+
 	public Admin(String em, String pass) {
 		super(em, pass, "A");
 	}

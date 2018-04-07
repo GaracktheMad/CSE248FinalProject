@@ -1,8 +1,13 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Stack;
 
-public abstract class User implements Stringable {
+public abstract class User implements Stringable, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1708268517670932602L;
 	private String email;
 	private final Identity id;
 	private static int idNum = 0;

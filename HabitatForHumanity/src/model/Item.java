@@ -1,6 +1,10 @@
 package model;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.Stack;
 
 public class Item implements Serializable, Stringable {
@@ -11,6 +15,7 @@ public class Item implements Serializable, Stringable {
 	private final Identity id;
 	private static int idNum = 0;
 	private Source donator;
+	private String photoLocation;
 
 	public Item(String name) {
 		super();
@@ -84,5 +89,20 @@ public class Item implements Serializable, Stringable {
 
 	static void setCounterState(int i) {
 		idNum = i;
+	}
+
+	public String getPhotoLocation() {
+		return photoLocation;
+	}
+
+	public boolean setPhoto(String photoLocation) {
+		File src = new File(photoLocation);
+		File target = new File(getID() + photoLocation.substring(photoLocation.lastIndexOf(".")));
+		try {
+			Files.copy(src.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING);
+		} catch (IOException e) {
+			return false;
+		}
+		return true;
 	}
 }

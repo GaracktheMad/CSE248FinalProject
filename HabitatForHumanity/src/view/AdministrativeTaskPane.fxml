@@ -1,8 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
-</AnchorPane>
-
+<BorderPane prefWidth="500.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <HBox alignment="TOP_CENTER" prefHeight="50.0" prefWidth="200.0" spacing="50.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button alignment="CENTER_RIGHT" mnemonicParsing="false" text="Customer Mode">
+               <opaqueInsets>
+                  <Insets bottom="50.0" />
+               </opaqueInsets>
+            </Button>
+            <Button alignment="CENTER_RIGHT" mnemonicParsing="false" text="Catologue Management" />
+            <Button mnemonicParsing="false" text="User Management" />
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="My User ID:" />
+                  <TextField editable="false" />
+               </children>
+            </HBox>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Change Password" textAlignment="CENTER" underline="true" />
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Current Password        ">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Label>
+                  <PasswordField alignment="CENTER" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="27.0" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="New Password             " />
+                  <PasswordField>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </PasswordField>
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="27.0" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Retype New Password" />
+                  <PasswordField />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <Button alignment="BOTTOM_RIGHT" cancelButton="true" mnemonicParsing="false" text="Exit" BorderPane.alignment="BOTTOM_RIGHT" />
+   </bottom>
+</BorderPane>

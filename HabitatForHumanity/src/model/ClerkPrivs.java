@@ -28,6 +28,13 @@ public interface ClerkPrivs {
 		Data.getItem(key).setPrice(p);
 		return true;
 	}
+	
+	public default boolean changeImage(Identity key, String loc) {
+		if (Data.checkItemKey(key) == false) {
+			return false;
+		}
+		return Data.getItem(key).setPhoto(loc);		
+	}
 
 	public default boolean removeItem(Identity key) {
 		return Data.removeItem(key);

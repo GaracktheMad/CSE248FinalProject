@@ -7,31 +7,41 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-
-<BorderPane prefHeight="350.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="350.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Login">
    <center>
       <VBox alignment="BASELINE_CENTER" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="BASELINE_CENTER" prefHeight="50.0" prefWidth="200.0">
                <children>
                   <Label text="Username" />
-                  <TextField />
+                  <TextField fx:id="username" />
                </children>
             </HBox>
             <HBox alignment="BASELINE_CENTER" prefHeight="50.0" prefWidth="200.0">
                <children>
                   <Label text="Password" />
-                  <PasswordField />
+                  <PasswordField fx:id="password" />
                </children>
             </HBox>
             <HBox alignment="BOTTOM_CENTER" prefHeight="50.0" prefWidth="200.0">
                <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" text="Submit" />
-                  <Button mnemonicParsing="false" text="Cancel" />
+                  <Button fx:id="submit" alignment="CENTER" mnemonicParsing="false" onAction="#handleSubmit" text="Submit" />
+                  <Button fx:id="cancel" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
                </children>
             </HBox>
          </children>
       </VBox>
    </center>
+   <top>
+      <Label fx:id="confirmationLbl" alignment="CENTER" contentDisplay="CENTER" text="Sign In" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+   </top>
+   <bottom>
+      <Button fx:id="newAccountButton" alignment="BOTTOM_CENTER" mnemonicParsing="false" onAction="#viewSwap" text="Create New Account" BorderPane.alignment="BOTTOM_CENTER" />
+   </bottom>
 </BorderPane>

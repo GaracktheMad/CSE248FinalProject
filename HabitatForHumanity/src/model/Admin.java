@@ -16,7 +16,7 @@ public class Admin extends User implements ClerkPrivs, AdminPrivs, ReadOnlyPrivs
 	protected Admin(User a, Identity key) {
 		super(a.getEmail(), a.getPassword(), key);
 	}
-
+	
 	/**
 	 * @see model.User#preDetails()
 	 * @return Stack with predetails on bottom with "Admin" at top

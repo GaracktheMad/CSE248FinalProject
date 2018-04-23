@@ -10,6 +10,10 @@ public class Data {
 	static void addUser(User u) {
 		users.put(u.getKey(), u);
 	}
+	
+	public static void createAccount(ReadOnly r) {
+		users.put(r.getKey(), r);
+	}
 
 	static void addItem(Item i) {
 		items.put(i.getKey(), i);
@@ -30,6 +34,10 @@ public class Data {
 	}
 
 	static User getUser(Identity key) {
+		if(users.isEmpty()) {
+			Admin a = new Admin("example@email.com", "Password");
+			users.put(a.getKey(),a);
+		}
 		return users.get(key);
 	}
 
@@ -51,6 +59,22 @@ public class Data {
 
 	public static boolean checkItemKey(Identity key) {
 		return items.containsKey(key);
+	}
+	
+	public static String userStatus(Identity key) {
+		if(checkItemKey(key) == false) {
+			return "n";
+		}
+		if(users.get(key).getClass() == Admin.class) {
+			return "a";
+		}
+		if(users.get(key).getClass() == Clerk.class) {
+			return "c";
+		}
+		if(users.get(key).getClass() == ReadOnly.class) {
+			return "ro";
+		}
+		return "e";
 	}
 
 }

@@ -3,7 +3,7 @@ package model;
 import java.io.Serializable;
 import java.util.Stack;
 
-public abstract class User implements Stringable, Serializable {
+public abstract class User implements Stringable, Serializable, IsListable {
 	/**
 	 * 
 	 */
@@ -25,11 +25,11 @@ public abstract class User implements Stringable, Serializable {
 		id = i;
 	}
 
-	public String getEmail() {
+	public String getName() {
 		return email;
 	}
 
-	public void setEmail(String email) {
+	public void setName(String email) {
 		this.email = email;
 	}
 

@@ -1,7 +1,7 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Stack;
 
 public interface AdminPrivs {
 	public default void createUser(User u) {
@@ -20,19 +20,19 @@ public interface AdminPrivs {
 		return Data.removeUser(key);
 	}
 
-	public default Stack<User> listAllUsers() {
+	public default ArrayList<IsListable> listAllUsers() {
 		Iterator<Identity> keys = Data.getUserKeys();
-		Stack<User> list = new Stack<User>();
+		ArrayList<IsListable> list = new ArrayList<IsListable>();
 		while (keys.hasNext()) {
 			Identity next = keys.next();
 			if (Data.getUser(next) instanceof Admin) {
-				list.push(new Admin(Data.getUser(next), next));
+				list.add(new Admin(Data.getUser(next), next));
 			}
 			else if (Data.getUser(next) instanceof Clerk) {
-				list.push(new Clerk(Data.getUser(next), next));
+				list.add(new Clerk(Data.getUser(next), next));
 			}
 			else if (Data.getUser(next) instanceof ReadOnly) {
-				list.push(new ReadOnly(Data.getUser(next), next));
+				list.add(new ReadOnly(Data.getUser(next), next));
 			}
 		}
 		return list;
@@ -40,7 +40,7 @@ public interface AdminPrivs {
 
 	public default boolean editEmail(Identity key, String email) {
 		if (Data.checkUserKey(key) == true) {
-			Data.getUser(key).setEmail(email);
+			Data.getUser(key).setName(email);
 			return true;
 		}
 		return false;

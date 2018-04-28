@@ -6,52 +6,55 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="10.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" spacing="10.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ListController">
    <children>
       <HBox alignment="CENTER" spacing="10.0">
          <children>
-            <Label text="Name" />
-            <Label text="ID" />
-            <Button mnemonicParsing="false" text="Select" />
+            <Label fx:id="name1" text="Name" />
+            <Label fx:id="id1" text="ID" />
+            <Button fx:id="select1" mnemonicParsing="false" onAction="#detailSelect1" text="Select" />
          </children>
       </HBox>
       <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" spacing="10.0">
          <children>
-            <Label text="Name" />
-            <Label text="ID" />
-            <Button mnemonicParsing="false" text="Select" />
+            <Label fx:id="name2" text="Name" />
+            <Label fx:id="id2" text="ID" />
+            <Button fx:id="select2" mnemonicParsing="false" onAction="#detailSelect2" text="Select" />
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" spacing="10.0">
+      <HBox alignment="CENTER" layoutX="10.0" layoutY="45.0" spacing="10.0">
          <children>
-            <Label text="Name" />
-            <Label text="ID" />
-            <Button mnemonicParsing="false" text="Select" />
+            <Label fx:id="name3" text="Name" />
+            <Label fx:id="id3" text="ID" />
+            <Button fx:id="select3" mnemonicParsing="false" onAction="#detailSelect3" text="Select" />
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" spacing="10.0">
+      <HBox alignment="CENTER" layoutX="10.0" layoutY="80.0" spacing="10.0">
          <children>
-            <Label text="Name" />
-            <Label text="ID" />
-            <Button mnemonicParsing="false" text="Select" />
+            <Label fx:id="name4" text="Name" />
+            <Label fx:id="id4" text="ID" />
+            <Button fx:id="select4" mnemonicParsing="false" onAction="#detailSelect4" text="Select" />
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" spacing="10.0">
+      <HBox alignment="CENTER" layoutX="10.0" layoutY="115.0" spacing="10.0">
          <children>
-            <Label text="Name" />
-            <Label text="ID" />
-            <Button mnemonicParsing="false" text="Select" />
+            <Label fx:id="name5" text="Name" />
+            <Label fx:id="id5" text="ID" />
+            <Button fx:id="select5" mnemonicParsing="false" onAction="#detailSelect5" text="Select" />
          </children>
       </HBox>
       <HBox spacing="50.0">
          <children>
-            <Button mnemonicParsing="false" text="Previous" />
-            <Button mnemonicParsing="false" text="Home" />
-            <Button mnemonicParsing="false" text="  Next  " />
+            <Button fx:id="prevButton" mnemonicParsing="false" onAction="#populateLast" text="Previous" />
+            <Button fx:id="homeButton" mnemonicParsing="false" onAction="#returnToTaskPane" text="Home" />
+            <Button fx:id="nextButton" mnemonicParsing="false" onAction="#populateNextPage" text="  Next  " />
          </children>
          <padding>
             <Insets top="15.0" />
          </padding>
       </HBox>
    </children>
+   <padding>
+      <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+   </padding>
 </VBox>

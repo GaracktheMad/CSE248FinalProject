@@ -14,7 +14,7 @@ public class Admin extends User implements ClerkPrivs, AdminPrivs, ReadOnlyPrivs
 	}
 
 	protected Admin(User a, Identity key) {
-		super(a.getEmail(), a.getPassword(), key);
+		super(a.getName(), a.getPassword(), key);
 	}
 	
 	/**

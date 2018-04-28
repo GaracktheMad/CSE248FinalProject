@@ -1,8 +1,7 @@
-package view;
+package controller;
 
 import java.io.IOException;
 
-import controller.FXMLLoadingController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -12,6 +11,7 @@ import javafx.scene.control.TextField;
 import model.Data;
 import model.Identity;
 import model.ReadOnly;
+import view.FXMLLoadingController;
 
 public class Login {
 
@@ -40,29 +40,14 @@ public class Login {
 
 	public void handleSubmit(ActionEvent e) {
 		Identity i = new Identity(username.getText().substring(0, 1), Integer.valueOf(username.getText().substring(1)));
-		String answer = Data.userStatus(i);
-		if (answer.equals("n")) {
+		boolean state = false;
+		try {
+			state = FXMLLoadingController.loginToTaskPane(i);
+		} catch (IOException e1) {
+			System.exit(1);
+		}
+		if (state == false) {
 			confirmationLbl.setText("INVALID USERNAME OR PASSWORD");
-		} else if (answer.equals("a")) {
-			try {
-				FXMLLoadingController.setFXML("view/AdministrativeTaskPane.fxml");
-			} catch (IOException e1) {
-				System.exit(1);
-			}
-		} else if (answer.equals("c")) {
-			try {
-				FXMLLoadingController.setFXML("view/ClerkTaskPane.fxml");
-			} catch (IOException e1) {
-				System.exit(1);
-			}
-		} else if (answer.equals("ro")) {
-			try {
-				FXMLLoadingController.setFXML("view/ReadOnlyTaskPane.fxml");
-			} catch (IOException e1) {
-				System.exit(1);
-			}
-		} else {
-			confirmationLbl.setText("An error has occured. Check your username and password, and try again.");
 		}
 	}
 
@@ -71,18 +56,18 @@ public class Login {
 	}
 
 	public void viewSwap(ActionEvent e) {
-		if (isLoginScreen == true) {
+		if (isLoginScreen == false) {
 			isLoginScreen = true;
 			try {
-				FXMLLoadingController.setFXML("view/Login.fxml");
+				FXMLLoadingController.login();;
 			} catch (IOException e1) {
 				System.exit(1);
 			}
 		}
-		if (isLoginScreen == false) {
-			isLoginScreen = true;
+		if (isLoginScreen == true) {
+			isLoginScreen = false;
 			try {
-				FXMLLoadingController.setFXML("view/CreateAccount.fxml");
+				FXMLLoadingController.createAccount();
 			} catch (IOException e1) {
 				System.exit(1);
 			}
@@ -91,11 +76,15 @@ public class Login {
 	}
 
 	public void handleNewAccount(ActionEvent e) {
-		if(username.getText() != null || password.getText() != null) {
+		if (username.getText() != null || password.getText() != null) {
 			ReadOnly r = new ReadOnly(username.getText(), password.getText());
-		Data.createAccount(r);
-		confirmationLbl.setText("CREATION SUCCESS! Your username is: " + r.getKey().toString());
-		}else {
+			Data.createAccount(r);
+			try {
+				FXMLLoadingController.popUp(r.getKey().toString());
+			} catch (IOException e1) {
+				System.exit(1);
+			}
+		} else {
 			confirmationLbl.setText("INVALID EMAIL OR PASSWORD");
 		}
 

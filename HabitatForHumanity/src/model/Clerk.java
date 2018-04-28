@@ -14,7 +14,7 @@ public class Clerk extends User implements ReadOnlyPrivs, ClerkPrivs {
 	}
 
 	protected Clerk(User c, Identity key) {
-		super(c.getEmail(), c.getPassword(), key);
+		super(c.getName(), c.getPassword(), key);
 	}
 
 	/**

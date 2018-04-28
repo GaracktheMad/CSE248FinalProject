@@ -7,7 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.Stack;
 
-public class Item implements Serializable, Stringable {
+public class Item implements Serializable, Stringable, IsListable {
 
 	private static final long serialVersionUID = -3775776854105022190L;
 	private String name;

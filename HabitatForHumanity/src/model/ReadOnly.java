@@ -13,7 +13,7 @@ public class ReadOnly extends User implements ReadOnlyPrivs {
 	}
 
 	protected ReadOnly(User r, Identity key) {
-		super(r.getEmail(), r.getPassword(), key);
+		super(r.getName(), r.getPassword(), key);
 	}
 
 	/**

@@ -1,11 +1,11 @@
 package model;
 
-import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Iterator;
 
 public class Data {
-	private final static HashMap<Identity, User> users = new HashMap<Identity, User>();
-	private final static HashMap<Identity, Item> items = new HashMap<Identity, Item>();
+	private final static Hashtable<Identity, User> users = new Hashtable<Identity, User>();
+	private final static Hashtable<Identity, Item> items = new Hashtable<Identity, Item>();
 
 	static void addUser(User u) {
 		users.put(u.getKey(), u);

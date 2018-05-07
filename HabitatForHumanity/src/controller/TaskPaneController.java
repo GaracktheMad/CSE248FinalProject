@@ -32,36 +32,44 @@ public class TaskPaneController implements IsTaskPane {
 	private Button submitButton;
 	@FXML
 	private Button exitButton;
-
-	// Event Listener on Button[#productViewBtn].onAction
 	@FXML
-	public void activateProductList(ActionEvent event) {
+	private Button createItemBtn;
+
+	@FXML
+	void activateProductList(ActionEvent event) {
 		try {
 			FXMLLoadingController.list(true);
 		} catch (IOException e) {
 			System.exit(1);
 		}
 	}
-	// Event Listener on Button[#submitButton].onAction
+
 	@FXML
-	public void attemptPassChange(ActionEvent event) {
+	void attemptPassChange(ActionEvent event) {
 		int result = changePassword(currentPass.getText(), newPass.getText(), newPassRetype.getText());
-		if(result == 0) {
+		if (result == 0) {
 			changePassLbl.setText("New Passwords Do Not Match!");
-		}
-		else if(result == -1) {
+		} else if (result == -1) {
 			changePassLbl.setText("PASSWORD NOT RECOGNIZED");
-		}
-		else if(result == 1) {
+		} else if (result == 1) {
 			changePassLbl.setText("Success!");
-		}
-		else {
+		} else {
 			changePassLbl.setText("ERROR");
 		}
 	}
-	// Event Listener on Button[#exitButton].onAction
+
 	@FXML
-	public void logout(ActionEvent event) {
+	void createItem(ActionEvent event) {
+		try {
+			FXMLLoadingController.createItem();
+		} catch (IOException e) {
+			System.exit(1);
+		}
+
+	}
+
+	@FXML
+	void logout(ActionEvent event) {
 		exit();
 	}
 }

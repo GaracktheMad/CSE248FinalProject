@@ -17,28 +17,23 @@ public class Login {
 
 	@FXML
 	Button submit;
-
 	@FXML
 	Button create;
-
 	@FXML
 	Button cancel;
-
 	@FXML
 	TextField username;
-
 	@FXML
 	PasswordField password;
-
 	@FXML
 	Label confirmationLbl;
-
 	@FXML
 	Button viewSwap;
 
 	private boolean isLoginScreen = true;
 
-	public void handleSubmit(ActionEvent e) {
+	@FXML
+	void handleSubmit(ActionEvent e) {
 		Identity i = new Identity(username.getText().substring(0, 1), Integer.valueOf(username.getText().substring(1)));
 		boolean state = false;
 		try {
@@ -51,15 +46,18 @@ public class Login {
 		}
 	}
 
-	public void handleCancel(ActionEvent e) {
+	@FXML
+	void handleCancel(ActionEvent e) {
 		System.exit(0);
 	}
 
-	public void viewSwap(ActionEvent e) {
+	@FXML
+	void viewSwap(ActionEvent e) {
 		if (isLoginScreen == false) {
 			isLoginScreen = true;
 			try {
-				FXMLLoadingController.login();;
+				FXMLLoadingController.login();
+				;
 			} catch (IOException e1) {
 				System.exit(1);
 			}
@@ -75,7 +73,8 @@ public class Login {
 
 	}
 
-	public void handleNewAccount(ActionEvent e) {
+	@FXML
+	void handleNewAccount(ActionEvent e) {
 		if (username.getText() != null || password.getText() != null) {
 			ReadOnly r = new ReadOnly(username.getText(), password.getText());
 			Data.createAccount(r);

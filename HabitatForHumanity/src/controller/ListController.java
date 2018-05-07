@@ -52,13 +52,13 @@ public class ListController {
 	@FXML
 	private Button nextButton;
 	private static boolean isItemList;
-	static ArrayList<Label> idLabelProcessor;
-	static ArrayList<Label> nameLabelProcessor;
-	static ArrayList<IsListable> elements;
-	private static int position = 0;
+	private ArrayList<Label> idLabelProcessor;
+	private ArrayList<Label> nameLabelProcessor;
+	private ArrayList<IsListable> elements;
+	private int position = 0;
 
-	public static void populateList(boolean itemList) {
-		isItemList = itemList;
+	@FXML
+	void initialize() {
 		idLabelProcessor = new ArrayList<Label>();
 		nameLabelProcessor = new ArrayList<Label>();
 		idLabelProcessor.add(id1);
@@ -77,10 +77,13 @@ public class ListController {
 			elements = CurrentUserController.userViewsItemList().listAllItems();
 		}
 		populateScreen(0);
-
 	}
 
-	private static void populateScreen(int start) {
+	public static void setItemList(boolean itemList) {
+		isItemList = itemList;
+	}
+
+	private void populateScreen(int start) {
 		for (int i = 0; i < 5; i++) {
 			try {
 				idLabelProcessor.get(i).setText(elements.get(start).getKey().toString());
@@ -98,47 +101,40 @@ public class ListController {
 		position = start;
 	}
 
-	// Event Listener on Button[#select1].onAction
 	@FXML
-	public void detailSelect1(ActionEvent event) {
+	void detailSelect1(ActionEvent event) {
 		selectionProcess(1);
 	}
 
-	// Event Listener on Button[#select2].onAction
 	@FXML
-	public void detailSelect2(ActionEvent event) {
+	void detailSelect2(ActionEvent event) {
 		selectionProcess(2);
 	}
 
-	// Event Listener on Button[#select3].onAction
 	@FXML
-	public void detailSelect3(ActionEvent event) {
+	void detailSelect3(ActionEvent event) {
 		selectionProcess(3);
 	}
 
-	// Event Listener on Button[#select4].onAction
 	@FXML
-	public void detailSelect4(ActionEvent event) {
+	void detailSelect4(ActionEvent event) {
 		selectionProcess(4);
 	}
 
-	// Event Listener on Button[#select5].onAction
 	@FXML
-	public void detailSelect5(ActionEvent event) {
+	void detailSelect5(ActionEvent event) {
 		selectionProcess(5);
 	}
 
-	// Event Listener on Button[#prevButton].onAction
 	@FXML
-	public void populateLast(ActionEvent event) {
+	void populateLast(ActionEvent event) {
 		if (position - 5 >= 0) {
 			populateScreen(position - 5);
 		}
 	}
 
-	// Event Listener on Button[#homeButton].onAction
 	@FXML
-	public void returnToTaskPane(ActionEvent event) {
+	void returnToTaskPane(ActionEvent event) {
 		try {
 			FXMLLoadingController.taskPane();
 		} catch (IOException e) {
@@ -146,29 +142,23 @@ public class ListController {
 		}
 	}
 
-	// Event Listener on Button[#nextButton].onAction
 	@FXML
-	public void populateNextPage(ActionEvent event) {
+	void populateNextPage(ActionEvent event) {
 		if (position + 5 < elements.size() + 5) {
 			populateScreen(position);
 		}
 	}
 
-	private static void selectionProcess(int i) {
+	private void selectionProcess(int i) {
 		String id = idLabelProcessor.get(i).getText();
 		if (id != null) {
 			try {
-				FXMLLoadingController.detail(new Identity(id.substring(0, 1), Integer.valueOf(id.substring(1))) , isItemList);
+				FXMLLoadingController.detail(new Identity(id.substring(0, 1), Integer.valueOf(id.substring(1))),
+						isItemList);
 			} catch (NumberFormatException e) {
 				System.exit(1);
 			}
 		}
 	}
 
-	public static void logout() {
-		isItemList = true;
-		idLabelProcessor = null;
-		nameLabelProcessor = null;
-		elements = null;
-	}
 }

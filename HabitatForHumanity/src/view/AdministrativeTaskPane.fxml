@@ -19,6 +19,8 @@
                </opaqueInsets>
             </Button>
             <Button fx:id="userManagementButton" mnemonicParsing="false" onAction="#activateUserList" text="User Management" />
+            <Button fx:id="createUserBtn" mnemonicParsing="false" onAction="#createUser" text="Create User" />
+            <Button fx:id="createItemBtn" mnemonicParsing="false" onAction="#createItem" text="Create Item" />
          </children>
          <opaqueInsets>
             <Insets />

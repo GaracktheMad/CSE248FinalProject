@@ -13,21 +13,20 @@ import javafx.event.ActionEvent;
 
 public class PopupController {
 	@FXML
-	private static TextField userNameGen;
+	private TextField userNameGen;
 	@FXML
 	private Button returnToLogin;
-	
-	// Event Listener on Button[#returnToLogin].onAction
+
 	@FXML
-	public void activateLogin(ActionEvent event) {
+	void activateLogin(ActionEvent event) {
 		try {
 			FXMLLoadingController.login();
 		} catch (IOException e) {
 			System.exit(1);
 		}
 	}
-	
-	public static void setUsername(String s) {
+
+	public void setUsername(String s) {
 		userNameGen.setText(s);
 	}
 }

@@ -5,6 +5,7 @@ import java.io.IOException;
 import controller.CurrentUserController;
 import controller.ListController;
 import controller.PopupController;
+import controller.UserDetailPaneController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import model.Identity;
@@ -18,8 +19,9 @@ public class FXMLLoadingController {
 	}
 
 	public static void popUp(String string) throws IOException {
-		PopupController.setUsername(string);
-		root = FXMLLoader.load(FXMLLoadingController.class.getResource("Popup.fxml"));
+		FXMLLoader loader = new FXMLLoader(FXMLLoadingController.class.getResource("Popup.fxml"));
+		loader.<PopupController>getController().setUsername(string);
+		root = loader.load();
 	}
 
 	public static Parent getRoot() throws IOException {
@@ -44,9 +46,9 @@ public class FXMLLoadingController {
 
 	public static void list(boolean isItemList) throws IOException {
 		if (isItemList == false && CurrentUserController.getRank().equals("Admin")) {
-			ListController.populateList(isItemList);
+			ListController.setItemList(isItemList);
 		} else {
-			ListController.populateList(true);
+			ListController.setItemList(true);
 		}
 		root = FXMLLoader.load(FXMLLoadingController.class.getResource("List.fxml"));
 	}
@@ -56,6 +58,9 @@ public class FXMLLoadingController {
 	}
 
 	public static void detail(Identity identity, boolean isItemList) {
+		if(isItemList == false && CurrentUserController.getRank().equals("Admin")) {
+			UserDetailPaneController.setIdentity(identity);
+		}
 
 	}
 
@@ -63,4 +68,13 @@ public class FXMLLoadingController {
 		CurrentUserController.set(i);
 		return taskPane();
 	}
+
+	public static void createUser() throws IOException {
+		root = FXMLLoader.load(FXMLLoadingController.class.getResource("CreateUser.fxml"));
+	}
+
+	public static void createItem() throws IOException {
+		root = FXMLLoader.load(FXMLLoadingController.class.getResource("CreateItem.fxml"));
+	}
+
 }

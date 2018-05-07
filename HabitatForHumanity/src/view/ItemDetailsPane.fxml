@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -8,47 +9,55 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefWidth="450.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefWidth="450.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ItemDetailsController">
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="25.0">
                <children>
                   <Label text="Name" />
-                  <TextField editable="false" />
+                  <TextField fx:id="nameField" editable="false" />
                </children>
             </HBox>
-            <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
+            <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
                <children>
                   <Label layoutX="10.0" layoutY="10.0" text="ID Code" />
-                  <TextField editable="false" layoutX="38.0" layoutY="10.0" />
+                  <TextField fx:id="idField" editable="false" layoutX="38.0" layoutY="10.0" />
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="31.0">
                <children>
                   <Label text="Price" />
-                  <TextField editable="false" />
+                  <TextField fx:id="priceField" editable="false" />
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="23.0">
                <children>
                   <Label text="Donor" />
-                  <TextField editable="false" />
+                  <TextField fx:id="donorInfoField" editable="false" />
                </children>
             </HBox>
          </children>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
       </VBox>
    </center>
    <top>
-      <HBox nodeOrientation="RIGHT_TO_LEFT" BorderPane.alignment="CENTER_RIGHT">
+      <HBox alignment="TOP_CENTER" nodeOrientation="RIGHT_TO_LEFT" spacing="25.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" text="Home" />
-            <Button alignment="TOP_RIGHT" mnemonicParsing="false" text="Edit" />
-            <Button mnemonicParsing="false" text="Back" />
+            <Button fx:id="deleteBtn" disable="true" mnemonicParsing="false" onAction="#deleteThis" text="Delete" visible="false" />
+            <Button fx:id="homeBtn" mnemonicParsing="false" onAction="#goHome" text="Home" />
+            <Button fx:id="editBtn" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#edit" text="Edit" />
+            <Button fx:id="backBtn" mnemonicParsing="false" onAction="#goBack" text="Back" />
+            <Button fx:id="setImageBtn" disable="true" mnemonicParsing="false" onAction="#setImage" text="Set Image" visible="false" />
          </children>
+         <BorderPane.margin>
+            <Insets bottom="20.0" top="10.0" />
+         </BorderPane.margin>
       </HBox>
    </top>
    <right>
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+      <ImageView fx:id="imgField" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
    </right>
 </BorderPane>

@@ -5,9 +5,9 @@ import java.io.IOException;
 import view.FXMLLoadingController;
 
 public interface IsTaskPane {
+	
 	default void exit(){
 		CurrentUserController.logout();
-		ListController.logout();
 		try {
 			FXMLLoadingController.login();
 		} catch (IOException e) {

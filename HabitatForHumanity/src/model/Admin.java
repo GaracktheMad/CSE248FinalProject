@@ -13,7 +13,7 @@ public class Admin extends User implements ClerkPrivs, AdminPrivs, ReadOnlyPrivs
 		super(em, pass, "A");
 	}
 
-	protected Admin(User a, Identity key) {
+	public Admin(User a, Identity key) {
 		super(a.getName(), a.getPassword(), key);
 	}
 	

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javafx.event.ActionEvent;
 
 import javafx.scene.control.Label;
+import model.Data;
 import model.Identity;
 import model.IsListable;
 import view.FXMLLoadingController;
@@ -51,14 +52,15 @@ public class ListController {
 	private Button homeButton;
 	@FXML
 	private Button nextButton;
-	private static boolean isItemList;
+	
+	private boolean isItemList;
 	private ArrayList<Label> idLabelProcessor;
 	private ArrayList<Label> nameLabelProcessor;
 	private ArrayList<IsListable> elements;
 	private int position = 0;
 
-	@FXML
-	void initialize() {
+	
+	void init() {
 		idLabelProcessor = new ArrayList<Label>();
 		nameLabelProcessor = new ArrayList<Label>();
 		idLabelProcessor.add(id1);
@@ -72,15 +74,32 @@ public class ListController {
 		nameLabelProcessor.add(name4);
 		nameLabelProcessor.add(name5);
 		if (CurrentUserController.getRank().equals("Admin") && isItemList == false) {
-			elements = CurrentUserController.userIsAdmin().listAllUsers();
+			if (Data.noUsers() == false) {
+				elements = CurrentUserController.userIsAdmin().listAllUsers();
+			} else {
+				try {
+					FXMLLoadingController.taskPane();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		} else {
-			elements = CurrentUserController.userViewsItemList().listAllItems();
+			if (Data.noItems() == false) {
+				elements = CurrentUserController.userViewsItemList().listAllItems();
+			} else {
+				try {
+					FXMLLoadingController.taskPane();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		populateScreen(0);
 	}
 
-	public static void setItemList(boolean itemList) {
+	public void setItemList(boolean itemList) {
 		isItemList = itemList;
+		init();
 	}
 
 	private void populateScreen(int start) {
@@ -138,7 +157,7 @@ public class ListController {
 		try {
 			FXMLLoadingController.taskPane();
 		} catch (IOException e) {
-			System.exit(1);
+			e.printStackTrace();
 		}
 	}
 
@@ -156,7 +175,7 @@ public class ListController {
 				FXMLLoadingController.detail(new Identity(id.substring(0, 1), Integer.valueOf(id.substring(1))),
 						isItemList);
 			} catch (NumberFormatException e) {
-				System.exit(1);
+				e.printStackTrace();
 			}
 		}
 	}

@@ -8,29 +8,27 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import model.Data;
 import model.Identity;
-import model.ReadOnly;
 import view.FXMLLoadingController;
 
 public class Login {
+	@FXML
+	private TextField username;
 
 	@FXML
-	Button submit;
-	@FXML
-	Button create;
-	@FXML
-	Button cancel;
-	@FXML
-	TextField username;
-	@FXML
-	PasswordField password;
-	@FXML
-	Label confirmationLbl;
-	@FXML
-	Button viewSwap;
+	private PasswordField password;
 
-	private boolean isLoginScreen = true;
+	@FXML
+	private Button submit;
+
+	@FXML
+	private Button cancel;
+
+	@FXML
+	private Label confirmationLbl;
+
+	@FXML
+	private Button newAccountButton;
 
 	@FXML
 	void handleSubmit(ActionEvent e) {
@@ -39,7 +37,7 @@ public class Login {
 		try {
 			state = FXMLLoadingController.loginToTaskPane(i);
 		} catch (IOException e1) {
-			System.exit(1);
+			e1.printStackTrace();
 		}
 		if (state == false) {
 			confirmationLbl.setText("INVALID USERNAME OR PASSWORD");
@@ -53,40 +51,11 @@ public class Login {
 
 	@FXML
 	void viewSwap(ActionEvent e) {
-		if (isLoginScreen == false) {
-			isLoginScreen = true;
-			try {
-				FXMLLoadingController.login();
-				;
-			} catch (IOException e1) {
-				System.exit(1);
-			}
+		try {
+			FXMLLoadingController.createAccount();
+		} catch (IOException e1) {
+			e1.printStackTrace();
 		}
-		if (isLoginScreen == true) {
-			isLoginScreen = false;
-			try {
-				FXMLLoadingController.createAccount();
-			} catch (IOException e1) {
-				System.exit(1);
-			}
-		}
-
-	}
-
-	@FXML
-	void handleNewAccount(ActionEvent e) {
-		if (username.getText() != null || password.getText() != null) {
-			ReadOnly r = new ReadOnly(username.getText(), password.getText());
-			Data.createAccount(r);
-			try {
-				FXMLLoadingController.popUp(r.getKey().toString());
-			} catch (IOException e1) {
-				System.exit(1);
-			}
-		} else {
-			confirmationLbl.setText("INVALID EMAIL OR PASSWORD");
-		}
-
 	}
 
 }

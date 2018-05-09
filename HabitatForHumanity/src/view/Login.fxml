@@ -28,7 +28,7 @@
             </HBox>
             <HBox alignment="BOTTOM_CENTER" prefHeight="50.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="submit" alignment="CENTER" mnemonicParsing="false" onAction="#handleSubmit" text="Submit" />
+                  <Button fx:id="submit" alignment="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#handleSubmit" text="Submit" />
                   <Button fx:id="cancel" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
                </children>
             </HBox>

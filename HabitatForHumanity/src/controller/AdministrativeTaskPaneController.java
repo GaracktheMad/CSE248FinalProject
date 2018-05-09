@@ -20,7 +20,7 @@ public class AdministrativeTaskPaneController extends TaskPaneController {
 		try {
 			FXMLLoadingController.createUser();
 		} catch (IOException e) {
-			System.exit(1);
+			e.printStackTrace();
 		}
 	}
 
@@ -29,7 +29,7 @@ public class AdministrativeTaskPaneController extends TaskPaneController {
 		try {
 			FXMLLoadingController.list(false);
 		} catch (IOException e) {
-			System.exit(1);
+			e.printStackTrace();
 		}
 	}
 }

@@ -14,29 +14,27 @@ public class Item implements Serializable, Stringable, IsListable {
 	private double price;
 	private final Identity id;
 	private static int idNum = 0;
-	private Source donator;
 	private String photoLocation;
 
-	public Item(String name) {
+	public Item(String name, double price, String photoLocation) {
 		super();
 		this.name = name;
-		id = new Identity("i", ++idNum);
-
+		this.price = price;
+		this.photoLocation = photoLocation;
+		id = new Identity("I", ++idNum);
 	}
 
 	public Item(Item i) {
 		super();
 		this.name = i.getName();
 		price = i.getPrice();
-		donator = i.getDonator();
-		id = new Identity("i", ++idNum);
+		id = new Identity("I", ++idNum);
 	}
 
 	protected Item(Item item, Identity i) {
 		super();
 		this.name = item.getName();
 		price = item.getPrice();
-		donator = item.getDonator();
 		id = i;
 	}
 
@@ -52,13 +50,6 @@ public class Item implements Serializable, Stringable, IsListable {
 		this.name = name;
 	}
 
-	public Source getDonator() {
-		return donator;
-	}
-
-	public void setDonator(Source donator) {
-		this.donator = donator;
-	}
 
 	public String getName() {
 		return name;
@@ -74,10 +65,10 @@ public class Item implements Serializable, Stringable, IsListable {
 
 	@Override
 	/**
-	 * @return Stack with donator stack on bottom, then price, then name
+	 * @return Stack price, then name
 	 */
 	public Stack<String> details() {
-		Stack<String> x = donator.details();
+		Stack<String> x = new Stack<String>();
 		x.push(String.valueOf(price));
 		x.push(name);
 		return x;

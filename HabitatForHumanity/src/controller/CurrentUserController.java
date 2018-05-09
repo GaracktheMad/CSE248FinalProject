@@ -25,6 +25,10 @@ public class CurrentUserController {
 		}
 	}
 	
+	public static User getUser() {
+		return u;
+	}
+	
 	public static Identity getID() {
 		return u.getKey();
 	}

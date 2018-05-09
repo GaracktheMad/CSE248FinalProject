@@ -13,14 +13,6 @@ public interface ClerkPrivs {
 		return true;
 	}
 
-	public default boolean changeSource(Identity key, Source s) {
-		if (Data.checkItemKey(key) == false) {
-			return false;
-		}
-		Data.getItem(key).setDonator(s);
-		return true;
-	}
-
 	public default boolean changePrice(Identity key, double p) {
 		if (Data.checkItemKey(key) == false) {
 			return false;

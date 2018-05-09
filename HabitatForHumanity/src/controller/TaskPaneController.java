@@ -40,7 +40,7 @@ public class TaskPaneController implements IsTaskPane {
 		try {
 			FXMLLoadingController.list(true);
 		} catch (IOException e) {
-			System.exit(1);
+			e.printStackTrace();
 		}
 	}
 
@@ -63,7 +63,7 @@ public class TaskPaneController implements IsTaskPane {
 		try {
 			FXMLLoadingController.createItem();
 		} catch (IOException e) {
-			System.exit(1);
+			e.printStackTrace();
 		}
 
 	}

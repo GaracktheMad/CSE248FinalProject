@@ -1,11 +1,33 @@
 package model;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Hashtable;
 import java.util.Iterator;
 
 public class Data {
-	private final static Hashtable<Identity, User> users = new Hashtable<Identity, User>();
-	private final static Hashtable<Identity, Item> items = new Hashtable<Identity, Item>();
+	private static Hashtable<Identity, User> users = new Hashtable<Identity, User>();
+	private static Hashtable<Identity, Item> items = new Hashtable<Identity, Item>();
+
+	public static void init() {
+		if (users.isEmpty() == true) {
+			Admin a = new Admin("Admin", "Password");
+			users.put(a.getKey(), a);
+		}
+	}
+
+	public static boolean noItems() {
+		return items.isEmpty();
+	}
+
+	public static boolean noUsers() {
+		return users.isEmpty();
+	}
 
 	static void addUser(User u) {
 		users.put(u.getKey(), u);
@@ -74,6 +96,31 @@ public class Data {
 
 	public static boolean checkItemKey(Identity key) {
 		return items.containsKey(key);
+	}
+
+	public static void save() throws FileNotFoundException, IOException {
+		ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(new File("Data.bin")));
+		out.writeObject(users);
+		out.writeInt(User.getCounterState());
+		out.writeObject(items);
+		out.writeInt(Item.getCounterState());
+		out.close();
+	}
+
+	public static boolean load() {
+		try {
+			ObjectInputStream in = new ObjectInputStream(new FileInputStream(new File("Data.bin")));
+			users = (Hashtable<Identity, User>) in.readObject();
+			User.setCounterState(in.readInt());
+			items = (Hashtable<Identity, Item>) in.readObject();
+			Item.setCounterState(in.readInt());
+			in.close();
+			return true;
+		} catch (IOException e) {
+			return false;
+		} catch (ClassNotFoundException e) {
+			return false;
+		}
 	}
 
 }

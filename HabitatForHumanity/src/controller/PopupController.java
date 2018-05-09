@@ -22,7 +22,7 @@ public class PopupController {
 		try {
 			FXMLLoadingController.login();
 		} catch (IOException e) {
-			System.exit(1);
+			e.printStackTrace();
 		}
 	}
 

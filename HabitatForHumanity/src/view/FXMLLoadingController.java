@@ -8,36 +8,56 @@ import controller.PopupController;
 import controller.UserDetailPaneController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import model.Data;
 import model.Identity;
 
 public class FXMLLoadingController {
 
+	private static Stage stage;
 	private static Parent root;
-	
-	public static void login() throws IOException {
-		root = FXMLLoader.load(FXMLLoadingController.class.getResource("Login.fxml"));
-	}
 
-	public static void popUp(String string) throws IOException {
-		FXMLLoader loader = new FXMLLoader(FXMLLoadingController.class.getResource("Popup.fxml"));
-		loader.<PopupController>getController().setUsername(string);
-		root = loader.load();
-	}
-
-	public static Parent getRoot() throws IOException {
+	public static void setStage(Stage s) {
+		stage = s;
 		if (root == null) {
-			login();
+			try {
+				login();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-		return root;
+	}
+
+	public static void updateStage() {
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+	}
+
+	public static void login() throws IOException {
+		if(Data.load() == false) {
+			Data.init();
+		}
+		root = FXMLLoader.load(FXMLLoadingController.class.getResource("Login.fxml"));
+		updateStage();
+	}
+
+	public static void popUp(String id) throws IOException {
+		FXMLLoader loader = new FXMLLoader(FXMLLoadingController.class.getResource("Popup.fxml"));
+		root = loader.load();
+		((PopupController) loader.getController()).setUsername(id);
+		updateStage();
 	}
 
 	public static boolean taskPane() throws IOException {
 		String answer = CurrentUserController.getRank();
 		if (answer.equals("Admin")) {
 			root = FXMLLoader.load(FXMLLoadingController.class.getResource("AdministrativeTaskPane.fxml"));
+			updateStage();
 			return true;
 		} else if (answer.equals("Clerk") || answer.equals("ReadOnly")) {
 			root = FXMLLoader.load(FXMLLoadingController.class.getResource("TaskPane.fxml"));
+			updateStage();
 			return true;
 		} else {
 			return false;
@@ -45,23 +65,36 @@ public class FXMLLoadingController {
 	}
 
 	public static void list(boolean isItemList) throws IOException {
+		FXMLLoader loader = new FXMLLoader(FXMLLoadingController.class.getResource("List.fxml"));
+		root = loader.load();
+		ListController ctrl = loader.getController();
 		if (isItemList == false && CurrentUserController.getRank().equals("Admin")) {
-			ListController.setItemList(isItemList);
+			ctrl.setItemList(isItemList);
 		} else {
-			ListController.setItemList(true);
+			ctrl.setItemList(true);
 		}
-		root = FXMLLoader.load(FXMLLoadingController.class.getResource("List.fxml"));
+		updateStage();
 	}
 
 	public static void createAccount() throws IOException {
 		root = FXMLLoader.load(FXMLLoadingController.class.getResource("CreateAccount.fxml"));
+		updateStage();
 	}
 
 	public static void detail(Identity identity, boolean isItemList) {
-		if(isItemList == false && CurrentUserController.getRank().equals("Admin")) {
-			UserDetailPaneController.setIdentity(identity);
+		if (isItemList == false && CurrentUserController.getRank().equals("Admin")) {
+			FXMLLoader loader = new FXMLLoader(FXMLLoadingController.class.getResource("UserDetailPane.fxml"));
+			UserDetailPaneController ctrl = loader.getController();
+			try {
+				root = loader.load();
+				ctrl.setIdentity(identity);
+				updateStage();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			// `
 		}
-
 	}
 
 	public static boolean loginToTaskPane(Identity i) throws IOException {
@@ -71,10 +104,12 @@ public class FXMLLoadingController {
 
 	public static void createUser() throws IOException {
 		root = FXMLLoader.load(FXMLLoadingController.class.getResource("CreateUser.fxml"));
+		updateStage();
 	}
 
 	public static void createItem() throws IOException {
 		root = FXMLLoader.load(FXMLLoadingController.class.getResource("CreateItem.fxml"));
+		updateStage();
 	}
 
 }

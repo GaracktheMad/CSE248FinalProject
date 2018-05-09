@@ -9,7 +9,7 @@ public class ReadOnly extends User implements ReadOnlyPrivs {
 	private static final long serialVersionUID = -663055128390325143L;
 
 	public ReadOnly(String em, String pass) {
-		super(em, pass, "U");
+		super(em, pass, "R");
 	}
 
 	protected ReadOnly(User r, Identity key) {

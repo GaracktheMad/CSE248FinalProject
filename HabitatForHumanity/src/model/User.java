@@ -16,7 +16,7 @@ public abstract class User implements Stringable, Serializable, IsListable {
 	public User(String em, String pass, String classifier) {
 		email = em;
 		password = pass;
-		id = new Identity(classifier, idNum++);
+		id = new Identity(classifier, ++idNum);
 	}
 
 	protected User(String em, String pass, Identity i) {

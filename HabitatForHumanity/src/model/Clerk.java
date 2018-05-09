@@ -13,7 +13,7 @@ public class Clerk extends User implements ReadOnlyPrivs, ClerkPrivs {
 		super(em, pass, "C");
 	}
 
-	protected Clerk(User c, Identity key) {
+	public Clerk(User c, Identity key) {
 		super(c.getName(), c.getPassword(), key);
 	}
 

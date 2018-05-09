@@ -1,6 +1,9 @@
 package model;
 
-public class Identity {
+import java.io.Serializable;
+
+public class Identity implements Serializable{
+	private static final long serialVersionUID = -4714042029386679085L;
 	private String classification;
 	private final int serial;
 	
@@ -17,7 +20,7 @@ public class Identity {
 	}
 	@Override
 	public String toString() {
-		return String.format("%s-%10d", classification, serial);
+		return String.format("%s%010d", classification, serial);
 	}
 	
 	@Override

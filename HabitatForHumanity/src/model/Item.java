@@ -15,13 +15,15 @@ public class Item implements Serializable, Stringable, IsListable {
 	private final Identity id;
 	private static int idNum = 0;
 	private String photoLocation;
+	private int quantity;
 
-	public Item(String name, double price, String photoLocation) {
+	public Item(String name, double price, String photoLocation, int amount) {
 		super();
 		this.name = name;
 		this.price = price;
 		this.photoLocation = photoLocation;
 		id = new Identity("I", ++idNum);
+		setQuantity(amount);
 	}
 
 	public Item(Item i) {
@@ -65,12 +67,14 @@ public class Item implements Serializable, Stringable, IsListable {
 
 	@Override
 	/**
-	 * @return Stack price, then name
+	 * @return Stack identity, then price, then name, then quantity
 	 */
 	public Stack<String> details() {
 		Stack<String> x = new Stack<String>();
+		x.push(id.toString());
 		x.push(String.valueOf(price));
 		x.push(name);
+		x.push(String.valueOf(quantity));
 		return x;
 	}
 
@@ -95,5 +99,13 @@ public class Item implements Serializable, Stringable, IsListable {
 			return false;
 		}
 		return true;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 }

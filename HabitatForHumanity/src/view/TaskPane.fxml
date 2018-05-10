@@ -11,14 +11,19 @@
 
 <BorderPane prefWidth="500.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TaskPaneController">
    <top>
-      <Button fx:id="productViewBtn" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#activateProductList" text="View Products" BorderPane.alignment="CENTER">
-         <opaqueInsets>
-            <Insets bottom="50.0" />
-         </opaqueInsets>
+      <HBox alignment="CENTER_RIGHT" BorderPane.alignment="CENTER_RIGHT">
          <BorderPane.margin>
             <Insets bottom="10.0" top="5.0" />
          </BorderPane.margin>
-      </Button>
+         <children>
+            <Button fx:id="createItemBtn" disable="true" mnemonicParsing="false" onAction="#createItem" text="Create Items" visible="false" />
+            <Button fx:id="productViewBtn" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#activateProductList" text="View Products">
+               <opaqueInsets>
+                  <Insets bottom="50.0" />
+               </opaqueInsets>
+            </Button>
+         </children>
+      </HBox>
    </top>
    <center>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
@@ -29,7 +34,10 @@
                   <TextField fx:id="userIDBox" editable="false" />
                </children>
             </HBox>
-            <Label fx:id="changePassLbl" alignment="CENTER" contentDisplay="CENTER" text="Change Password" textAlignment="CENTER" underline="true" />
+            <Label fx:id="changePassLbl" alignment="CENTER" contentDisplay="CENTER" text="Change Password" textAlignment="CENTER" underline="true">
+               <padding>
+                  <Insets bottom="10.0" />
+               </padding></Label>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="Current Password        ">

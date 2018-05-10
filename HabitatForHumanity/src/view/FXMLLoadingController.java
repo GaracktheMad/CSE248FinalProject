@@ -3,6 +3,7 @@ package view;
 import java.io.IOException;
 
 import controller.CurrentUserController;
+import controller.ItemDetailsPaneController;
 import controller.ListController;
 import controller.PopupController;
 import controller.UserDetailPaneController;
@@ -35,7 +36,7 @@ public class FXMLLoadingController {
 	}
 
 	public static void login() throws IOException {
-		if(Data.load() == false) {
+		if (Data.load() == false) {
 			Data.init();
 		}
 		root = FXMLLoader.load(FXMLLoadingController.class.getResource("Login.fxml"));
@@ -84,16 +85,24 @@ public class FXMLLoadingController {
 	public static void detail(Identity identity, boolean isItemList) {
 		if (isItemList == false && CurrentUserController.getRank().equals("Admin")) {
 			FXMLLoader loader = new FXMLLoader(FXMLLoadingController.class.getResource("UserDetailPane.fxml"));
-			UserDetailPaneController ctrl = loader.getController();
 			try {
 				root = loader.load();
+				UserDetailPaneController ctrl = loader.getController();
 				ctrl.setIdentity(identity);
 				updateStage();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		} else {
-			// `
+			FXMLLoader loader = new FXMLLoader(FXMLLoadingController.class.getResource("ItemDetailPane.fxml"));
+			try {
+				root = loader.load();
+				ItemDetailsPaneController ctrl = loader.getController();
+				ctrl.data(identity, stage);
+				updateStage();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

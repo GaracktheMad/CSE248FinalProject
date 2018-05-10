@@ -1,7 +1,9 @@
 package controller;
 
 import model.Admin;
+import model.AdminPrivs;
 import model.Clerk;
+import model.ClerkPrivs;
 import model.Data;
 import model.Identity;
 import model.ReadOnly;
@@ -38,31 +40,25 @@ public class CurrentUserController {
 		rank = null;
 	}
 
-	public static Admin userIsAdmin() {
-		if (rank.equals("Admin")) {
-			return (Admin) u;
+	public static AdminPrivs userIsAdmin() {
+		if (u instanceof AdminPrivs) {
+			return (AdminPrivs) u;
 		}
 		return null;
 	}
 
-	public static Clerk userIsClerk() {
-		if (rank.equals("Clerk")) {
-			return (Clerk) u;
+	public static ClerkPrivs userIsClerk() {
+		if (u instanceof ClerkPrivs) {
+			return (ClerkPrivs) u;
 		}
 		return null;
 	}
-
-	public static ReadOnly userIsReadOnly() {
-		if (rank.equals("ReadOnly")) {
-			return (ReadOnly) u;
-		}
-		return null;
-	}
+	
 	public static ReadOnlyPrivs userViewsItemList() {
-		if(rank.equals("error")) {
-			return null;
+		if(u instanceof ReadOnlyPrivs) {
+			return (ReadOnlyPrivs) u;
 		}
-		return (ReadOnlyPrivs) u;
+		return null;
 		
 	}
 

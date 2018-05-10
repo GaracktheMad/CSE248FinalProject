@@ -32,4 +32,8 @@ public class AdministrativeTaskPaneController extends TaskPaneController {
 			e.printStackTrace();
 		}
 	}
+	@Override
+	void initialize(){
+		
+	}
 }

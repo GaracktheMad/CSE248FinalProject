@@ -7,32 +7,59 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="10.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CreateItemController">
+<VBox alignment="CENTER" spacing="16.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CreateItemController">
    <children>
-      <HBox spacing="20.0">
+      <Label fx:id="errorLbl" alignment="CENTER" contentDisplay="CENTER" textAlignment="CENTER" textFill="#da1717">
+         <font>
+            <Font name="Malgun Gothic" size="21.0" />
+         </font>
+      </Label>
+      <HBox spacing="51.0">
          <children>
             <Label text="Name" />
-            <TextField fx:id="nameField" editable="false" />
+            <TextField fx:id="nameField" />
          </children>
       </HBox>
-      <HBox layoutX="20.0" layoutY="20.0" spacing="25.0">
+      <HBox layoutX="20.0" layoutY="20.0" spacing="57.0">
          <children>
             <Label text="Price" />
-            <TextField fx:id="priceField" editable="false" />
+            <TextField fx:id="priceField" />
          </children>
       </HBox>
-      <HBox layoutX="20.0" layoutY="20.0" spacing="20.0">
+      <HBox spacing="37.0">
          <children>
-            <Label text="Image" />
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+            <Label text="Quantity" />
+            <TextField fx:id="quantityField" />
+         </children>
+      </HBox>
+      <HBox layoutX="20.0" layoutY="108.0">
+         <children>
+            <Label text="Image URL">
+               <padding>
+                  <Insets right="25.0" />
+               </padding>
+            </Label>
+            <TextField fx:id="imageURLField" editable="false" promptText="Image URL will appear here">
+               <HBox.margin>
+                  <Insets right="13.0" />
+               </HBox.margin>
+            </TextField>
             <Button fx:id="imageBtn" mnemonicParsing="false" onAction="#selectImage" text="Select Image" />
+         </children>
+      </HBox>
+      <ImageView fx:id="img" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+       <HBox spacing="71.0">
+         <children>
+            <Label text="ID" />
+            <TextField fx:id="idField" editable="false" promptText="Keep Blank" />
          </children>
       </HBox>
       <HBox alignment="CENTER" spacing="10.0">
          <children>
             <Button fx:id="submitBtn" defaultButton="true" mnemonicParsing="false" onAction="#submit" text="Submit" />
-            <Button fx:id="cancelBtn" cancelButton="true" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
+            <Button fx:id="returnBtn" cancelButton="true" mnemonicParsing="false" onAction="#returnHome" text="Return" />
          </children>
       </HBox>
    </children>

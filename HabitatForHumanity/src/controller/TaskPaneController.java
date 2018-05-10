@@ -72,4 +72,13 @@ public class TaskPaneController implements IsTaskPane {
 	void logout(ActionEvent event) {
 		exit();
 	}
+	
+
+    @FXML
+    void initialize() {
+    	if(CurrentUserController.userIsClerk() != null) {
+    		createItemBtn.setVisible(true);
+    		createItemBtn.setDisable(false);
+    	}
+    }
 }

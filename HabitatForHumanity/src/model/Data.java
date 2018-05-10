@@ -107,6 +107,7 @@ public class Data {
 		out.close();
 	}
 
+	@SuppressWarnings("unchecked")
 	public static boolean load() {
 		try {
 			ObjectInputStream in = new ObjectInputStream(new FileInputStream(new File("Data.bin")));
@@ -121,6 +122,11 @@ public class Data {
 		} catch (ClassNotFoundException e) {
 			return false;
 		}
+	}
+
+	public static Item getCopyItem(Identity key) {
+		Item i = items.get(key);
+		return new Item(i, key);
 	}
 
 }

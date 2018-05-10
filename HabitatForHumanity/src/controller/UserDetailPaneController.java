@@ -6,6 +6,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import model.Admin;
+import model.AdminPrivs;
 import model.Clerk;
 import model.Data;
 import model.Identity;
@@ -34,12 +35,12 @@ public class UserDetailPaneController {
 	private TextField rankField;
 	@FXML
 	private VBox passChangeBox;
-
 	@FXML
 	private PasswordField passchangeField;
 
 	private Identity identity;
-	
+	private boolean sameAsUser = false;
+
 	private void swapMode() {
 		saveBtn.setDisable(!saveBtn.isDisabled());
 		passChangeBox.setDisable(!passChangeBox.isDisabled());
@@ -48,8 +49,10 @@ public class UserDetailPaneController {
 		homeBtn.setDisable(!homeBtn.isDisabled());
 		emailField.setEditable(!emailField.isEditable());
 		rankField.setEditable(!rankField.isEditable());
-		deleteBtn.setDisable(!deleteBtn.isDisabled());
-		deleteBtn.setVisible(!deleteBtn.isVisible());
+		if (sameAsUser == false) {
+			deleteBtn.setDisable(!deleteBtn.isDisabled());
+			deleteBtn.setVisible(!deleteBtn.isVisible());
+		}
 	}
 
 	@FXML
@@ -87,16 +90,18 @@ public class UserDetailPaneController {
 
 	public void setIdentity(Identity id) {
 		identity = id;
+		init();
 	}
 
 	@FXML
 	void saveFields(ActionEvent event) {
 		String rank = rankField.getText().trim();
 		User u = Data.getCopyUser(identity);
-		Admin currentUser = CurrentUserController.userIsAdmin();
+		AdminPrivs currentUser = CurrentUserController.userIsAdmin();
 		String email = emailField.getText().trim();
 		String pass = passchangeField.getText().trim();
-		if (rank.substring(0, 1).equalsIgnoreCase(identity.getClassification()) == true || rank == null || rank.equals("") == true) {
+		if (rank.substring(0, 1).equalsIgnoreCase(identity.getClassification()) == true || rank == null
+				|| rank.equals("") == true) {
 			if (email != null) {
 				currentUser.editEmail(identity, email);
 			}
@@ -133,12 +138,14 @@ public class UserDetailPaneController {
 		swapMode();
 	}
 
-	@FXML
-	void initialize() {
+	void init() {
 		Stack<String> userItems = Data.getCopyUser(identity).details();
 		idField.setText(userItems.pop());
 		emailField.setText(userItems.pop());
 		rankField.setText(userItems.pop());
+		if (CurrentUserController.getUser().getKey() != identity) {
+			sameAsUser = true;
+		}
 	}
 
 }

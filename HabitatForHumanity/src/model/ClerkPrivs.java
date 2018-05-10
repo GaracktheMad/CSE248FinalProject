@@ -27,6 +27,14 @@ public interface ClerkPrivs {
 		}
 		return Data.getItem(key).setPhoto(loc);		
 	}
+	
+	public default boolean changeQuantity(Identity key, int i) {
+		if(Data.checkItemKey(key) == false) {
+			return false;
+		}
+		Data.getItem(key).setQuantity(i);
+		return true;
+	}
 
 	public default boolean removeItem(Identity key) {
 		return Data.removeItem(key);

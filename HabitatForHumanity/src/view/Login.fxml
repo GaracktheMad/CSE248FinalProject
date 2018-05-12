@@ -7,45 +7,51 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="350.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Login">
-   <center>
-      <VBox alignment="BASELINE_CENTER" BorderPane.alignment="CENTER">
-         <children>
-            <HBox alignment="BASELINE_CENTER" prefHeight="50.0" prefWidth="200.0">
+<StackPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Login">
+   <children>
+      <BorderPane prefHeight="350.0" prefWidth="500.0">
+         <center>
+            <VBox alignment="BASELINE_CENTER" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="Username" />
-                  <TextField fx:id="username" />
+                  <HBox alignment="BASELINE_CENTER" prefHeight="50.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Username" />
+                        <TextField fx:id="username" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="BASELINE_CENTER" prefHeight="50.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Password" />
+                        <PasswordField fx:id="password" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_CENTER" prefHeight="50.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="submit" alignment="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#handleSubmit" text="Submit" />
+                        <Button fx:id="cancel" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
-            <HBox alignment="BASELINE_CENTER" prefHeight="50.0" prefWidth="200.0">
-               <children>
-                  <Label text="Password" />
-                  <PasswordField fx:id="password" />
-               </children>
-            </HBox>
-            <HBox alignment="BOTTOM_CENTER" prefHeight="50.0" prefWidth="200.0">
-               <children>
-                  <Button fx:id="submit" alignment="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#handleSubmit" text="Submit" />
-                  <Button fx:id="cancel" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-   </center>
-   <top>
-      <Label fx:id="confirmationLbl" alignment="CENTER" contentDisplay="CENTER" text="Sign In" BorderPane.alignment="CENTER">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-   </top>
-   <bottom>
-      <Button fx:id="newAccountButton" alignment="BOTTOM_CENTER" mnemonicParsing="false" onAction="#viewSwap" text="Create New Account" BorderPane.alignment="BOTTOM_CENTER">
-         <BorderPane.margin>
-            <Insets bottom="15.0" />
-         </BorderPane.margin></Button>
-   </bottom>
-</BorderPane>
+            </VBox>
+         </center>
+         <top>
+            <Label fx:id="confirmationLbl" alignment="CENTER" contentDisplay="CENTER" text="Sign In" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </top>
+         <bottom>
+            <Button fx:id="newAccountButton" alignment="BOTTOM_CENTER" mnemonicParsing="false" onAction="#viewSwap" text="Create New Account" BorderPane.alignment="BOTTOM_CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="15.0" />
+               </BorderPane.margin>
+            </Button>
+         </bottom>
+      </BorderPane>
+   </children>
+</StackPane>

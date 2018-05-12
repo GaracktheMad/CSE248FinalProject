@@ -1,18 +1,12 @@
 package controller;
 
 import javafx.fxml.FXML;
-
 import javafx.scene.control.Button;
-
 import javafx.scene.control.TextField;
 import view.FXMLLoadingController;
-
 import java.io.IOException;
-
 import javafx.event.ActionEvent;
-
 import javafx.scene.control.Label;
-
 import javafx.scene.control.PasswordField;
 
 public class TaskPaneController implements IsTaskPane {
@@ -80,5 +74,6 @@ public class TaskPaneController implements IsTaskPane {
     		createItemBtn.setVisible(true);
     		createItemBtn.setDisable(false);
     	}
+    	userIDBox.setText(CurrentUserController.getID().toString());
     }
 }

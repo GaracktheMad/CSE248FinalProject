@@ -1,10 +1,6 @@
 package model;
 
-import java.io.File;
-import java.io.IOException;
 import java.io.Serializable;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.util.Stack;
 
 public class Item implements Serializable, Stringable, IsListable {
@@ -23,7 +19,7 @@ public class Item implements Serializable, Stringable, IsListable {
 		this.price = price;
 		this.photoLocation = photoLocation;
 		id = new Identity("I", ++idNum);
-		setQuantity(amount);
+		quantity = amount;
 	}
 
 	public Item(Item i) {
@@ -35,9 +31,11 @@ public class Item implements Serializable, Stringable, IsListable {
 
 	protected Item(Item item, Identity i) {
 		super();
-		this.name = item.getName();
+		name = item.getName();
 		price = item.getPrice();
+		photoLocation = item.getPhotoLocation();
 		id = i;
+		quantity = item.getQuantity();
 	}
 
 	public double getPrice() {
@@ -51,7 +49,6 @@ public class Item implements Serializable, Stringable, IsListable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	public String getName() {
 		return name;
@@ -71,10 +68,10 @@ public class Item implements Serializable, Stringable, IsListable {
 	 */
 	public Stack<String> details() {
 		Stack<String> x = new Stack<String>();
-		x.push(id.toString());
-		x.push(String.valueOf(price));
-		x.push(name);
 		x.push(String.valueOf(quantity));
+		x.push(name);
+		x.push(String.valueOf(price));
+		x.push(id.toString());
 		return x;
 	}
 
@@ -90,15 +87,8 @@ public class Item implements Serializable, Stringable, IsListable {
 		return photoLocation;
 	}
 
-	public boolean setPhoto(String photoLocation) {
-		File src = new File(photoLocation);
-		File target = new File(getID() + photoLocation.substring(photoLocation.lastIndexOf(".")));
-		try {
-			Files.copy(src.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING);
-		} catch (IOException e) {
-			return false;
-		}
-		return true;
+	public void setPhoto(String photoLocation) {
+		this.photoLocation = photoLocation;
 	}
 
 	public int getQuantity() {

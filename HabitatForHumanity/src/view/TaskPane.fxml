@@ -7,71 +7,78 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefWidth="500.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TaskPaneController">
-   <top>
-      <HBox alignment="CENTER_RIGHT" BorderPane.alignment="CENTER_RIGHT">
-         <BorderPane.margin>
-            <Insets bottom="10.0" top="5.0" />
-         </BorderPane.margin>
-         <children>
-            <Button fx:id="createItemBtn" disable="true" mnemonicParsing="false" onAction="#createItem" text="Create Items" visible="false" />
-            <Button fx:id="productViewBtn" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#activateProductList" text="View Products">
-               <opaqueInsets>
-                  <Insets bottom="50.0" />
-               </opaqueInsets>
-            </Button>
-         </children>
-      </HBox>
-   </top>
-   <center>
-      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <children>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+
+<StackPane xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TaskPaneController">
+   <children>
+      <BorderPane prefWidth="500.0">
+         <top>
+            <HBox alignment="CENTER_RIGHT" BorderPane.alignment="CENTER_RIGHT">
+               <BorderPane.margin>
+                  <Insets bottom="10.0" top="5.0" />
+               </BorderPane.margin>
                <children>
-                  <Label text="My User ID:" />
-                  <TextField fx:id="userIDBox" editable="false" />
+                  <Button fx:id="createItemBtn" disable="true" mnemonicParsing="false" onAction="#createItem" text="Create Items" visible="false" />
+                  <Button fx:id="productViewBtn" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#activateProductList" text="View Products">
+                     <opaqueInsets>
+                        <Insets bottom="50.0" />
+                     </opaqueInsets>
+                  </Button>
                </children>
             </HBox>
-            <Label fx:id="changePassLbl" alignment="CENTER" contentDisplay="CENTER" text="Change Password" textAlignment="CENTER" underline="true">
-               <padding>
-                  <Insets bottom="10.0" />
-               </padding></Label>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+         </top>
+         <center>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="Current Password        ">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="My User ID:" />
+                        <TextField fx:id="userIDBox" editable="false" />
+                     </children>
+                  </HBox>
+                  <Label fx:id="changePassLbl" alignment="CENTER" contentDisplay="CENTER" text="Change Password" textAlignment="CENTER" underline="true">
+                     <padding>
+                        <Insets bottom="10.0" />
+                     </padding>
                   </Label>
-                  <PasswordField fx:id="currentPass" alignment="CENTER" />
-               </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </HBox>
-            <HBox layoutX="10.0" layoutY="27.0" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Label text="New Password             " />
-                  <PasswordField fx:id="newPass">
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Current Password        ">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </Label>
+                        <PasswordField fx:id="currentPass" alignment="CENTER" />
+                     </children>
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
-                  </PasswordField>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="27.0" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="New Password             " />
+                        <PasswordField fx:id="newPass">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </PasswordField>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="27.0" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Retype New Password" />
+                        <PasswordField fx:id="newPassRetype" />
+                     </children>
+                  </HBox>
+                  <Button fx:id="submitButton" mnemonicParsing="false" onAction="#attemptPassChange" text="Submit" />
                </children>
-            </HBox>
-            <HBox layoutX="10.0" layoutY="27.0" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Label text="Retype New Password" />
-                  <PasswordField fx:id="newPassRetype" />
-               </children>
-            </HBox>
-            <Button fx:id="submitButton" mnemonicParsing="false" onAction="#attemptPassChange" text="Submit" />
-         </children>
-      </VBox>
-   </center>
-   <bottom>
-      <Button fx:id="exitButton" cancelButton="true" mnemonicParsing="false" onAction="#logout" text="Exit" BorderPane.alignment="BOTTOM_RIGHT" />
-   </bottom>
-</BorderPane>
+            </VBox>
+         </center>
+         <bottom>
+            <Button fx:id="exitButton" cancelButton="true" mnemonicParsing="false" onAction="#logout" text="Exit" BorderPane.alignment="BOTTOM_RIGHT" />
+         </bottom>
+      </BorderPane>
+   </children>
+</StackPane>

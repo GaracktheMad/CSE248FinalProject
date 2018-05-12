@@ -7,64 +7,72 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root prefWidth="450.0" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.">
-   <right>
-      <VBox spacing="20.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="editBtn" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#edit" text="Edit" />
-            <Button fx:id="homeBtn" mnemonicParsing="false" onAction="#goHome" text="Home" />
-            <Button fx:id="backBtn" mnemonicParsing="false" onAction="#returnToList" text="Back" />
-            <Button fx:id="saveBtn" disable="true" mnemonicParsing="false" onAction="#saveFields" text="Save" />
-            <Button fx:id="deleteBtn" disable="true" mnemonicParsing="false" onAction="#deleteThis" text="Delete" />
-         </children>
-         <padding>
-            <Insets bottom="20.0" right="10.0" top="20.0" />
-         </padding>
-      </VBox>
-   </right>
-   <center>
-      <VBox spacing="25.0" BorderPane.alignment="CENTER">
-         <children>
-            <HBox spacing="50.0">
+
+<StackPane xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UserDetailPaneController">
+   <children>
+      <BorderPane prefWidth="450.0">
+         <right>
+            <VBox spacing="20.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="Email">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin></Label>
-                  <TextField fx:id="emailField" editable="false" />
+                  <Button fx:id="editBtn" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#edit" text="Edit" />
+                  <Button fx:id="homeBtn" mnemonicParsing="false" onAction="#goHome" text="Home" />
+                  <Button fx:id="backBtn" mnemonicParsing="false" onAction="#returnToList" text="Back" />
+                  <Button fx:id="saveBtn" disable="true" mnemonicParsing="false" onAction="#saveFields" text="Save" />
+                  <Button fx:id="deleteBtn" disable="true" mnemonicParsing="false" onAction="#deleteThis" text="Delete" />
                </children>
-            </HBox>
-            <HBox layoutX="10.0" layoutY="10.0" spacing="35.0">
-               <children>
-                  <Label layoutX="10.0" layoutY="10.0" text="ID Code" />
-                  <TextField fx:id="idField" editable="false" layoutX="38.0" layoutY="10.0">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin></TextField>
-               </children>
-            </HBox>
-            <HBox layoutX="30.0" layoutY="80.0" spacing="51.0">
-               <children>
-                  <Label layoutX="10.0" layoutY="10.0" text="Rank" />
-                  <TextField fx:id="rankField" editable="false" layoutX="38.0" layoutY="10.0">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </TextField>
-               </children>
-            </HBox>
-            <VBox fx:id="passChangeBox" visible="false">
-               <children>
-                  <Label text="Force Password Change" />
-                  <PasswordField fx:id="passchangeField" />
-               </children>
+               <padding>
+                  <Insets bottom="20.0" right="10.0" top="20.0" />
+               </padding>
             </VBox>
-         </children>
-         <padding>
-            <Insets bottom="21.0" left="20.0" top="20.0" />
-         </padding>
-      </VBox>
-   </center>
-</fx:root>
+         </right>
+         <center>
+            <VBox spacing="25.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox spacing="50.0">
+                     <children>
+                        <Label text="Email">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="emailField" editable="false" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" spacing="35.0">
+                     <children>
+                        <Label layoutX="10.0" layoutY="10.0" text="ID Code" />
+                        <TextField fx:id="idField" editable="false" layoutX="38.0" layoutY="10.0">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="30.0" layoutY="80.0" spacing="51.0">
+                     <children>
+                        <Label layoutX="10.0" layoutY="10.0" text="Rank" />
+                        <TextField fx:id="rankField" editable="false" layoutX="38.0" layoutY="10.0">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <VBox fx:id="passChangeBox" visible="false">
+                     <children>
+                        <Label text="Force Password Change" />
+                        <PasswordField fx:id="passchangeField" />
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="21.0" left="20.0" top="20.0" />
+               </padding>
+            </VBox>
+         </center>
+      </BorderPane>
+   </children>
+</StackPane>

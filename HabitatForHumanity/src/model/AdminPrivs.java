@@ -1,5 +1,6 @@
 package model;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -27,11 +28,9 @@ public interface AdminPrivs {
 			Identity next = keys.next();
 			if (Data.getUser(next) instanceof Admin) {
 				list.add(new Admin(Data.getUser(next), next));
-			}
-			else if (Data.getUser(next) instanceof Clerk) {
+			} else if (Data.getUser(next) instanceof Clerk) {
 				list.add(new Clerk(Data.getUser(next), next));
-			}
-			else if (Data.getUser(next) instanceof ReadOnly) {
+			} else if (Data.getUser(next) instanceof ReadOnly) {
 				list.add(new ReadOnly(Data.getUser(next), next));
 			}
 		}
@@ -41,6 +40,11 @@ public interface AdminPrivs {
 	public default boolean editEmail(Identity key, String email) {
 		if (Data.checkUserKey(key) == true) {
 			Data.getUser(key).setName(email);
+			try {
+				Data.save();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			return true;
 		}
 		return false;
@@ -49,11 +53,14 @@ public interface AdminPrivs {
 	public default boolean editPass(Identity key, String password) {
 		if (Data.checkUserKey(key) == true) {
 			Data.getUser(key).setPassword(password);
+			try {
+				Data.save();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			return true;
 		}
 		return false;
 	}
-	
-	
 
 }

@@ -41,9 +41,10 @@ public class CreateItemController extends CreationController {
 		chooseImg.setTitle("Select an image to use");
 		chooseImg.getExtensionFilters().add(new ExtensionFilter("Image Files", "*.gif", "*.bmp", "*.jpeg", "*.png"));
 		File selectedFile = chooseImg.showOpenDialog(thisStage);
-		if (selectedFile.getAbsolutePath() != null && CurrentUserController.userIsClerk() != null) {
-			imageURLField.setText(selectedFile.getAbsolutePath());
-			img.setImage(new Image(selectedFile.getAbsolutePath()));
+		if (selectedFile.getPath() != null && CurrentUserController.userIsClerk() != null) {
+			String formattedFile = String.format("file:///%s", selectedFile.getPath());
+			imageURLField.setText(formattedFile);
+			img.setImage(new Image(formattedFile));
 		}
 	}
 

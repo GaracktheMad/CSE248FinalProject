@@ -31,19 +31,39 @@ public class Data {
 
 	static void addUser(User u) {
 		users.put(u.getKey(), u);
+		try {
+			save();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void createAccount(ReadOnly r) {
 		users.put(r.getKey(), r);
+		try {
+			save();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	static void addItem(Item i) {
 		items.put(i.getKey(), i);
+		try {
+			save();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	static boolean removeItem(Identity i) {
 		if (items.remove(i) == null) {
 			return false;
+		}
+		try {
+			save();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		return true;
 	}
@@ -51,6 +71,11 @@ public class Data {
 	static boolean removeUser(Identity i) {
 		if (users.remove(i) == null) {
 			return false;
+		}
+		try {
+			save();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		return true;
 	}
@@ -112,7 +137,9 @@ public class Data {
 		try {
 			ObjectInputStream in = new ObjectInputStream(new FileInputStream(new File("Data.bin")));
 			users = (Hashtable<Identity, User>) in.readObject();
+			System.out.println(users.get(new Identity("A", 0000000001)).getPassword());
 			User.setCounterState(in.readInt());
+			System.out.println(User.getCounterState());
 			items = (Hashtable<Identity, Item>) in.readObject();
 			Item.setCounterState(in.readInt());
 			in.close();

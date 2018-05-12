@@ -1,5 +1,4 @@
 
-
 package controller;
 
 import java.io.IOException;
@@ -14,25 +13,25 @@ import view.FXMLLoadingController;
 public abstract class CreationController {
 	@FXML
 	protected TextField nameField;
-	
+
 	@FXML
 	private Label errorLbl;
-	
+
 	@FXML
 	protected Button returnBtn;
-	
+
 	@FXML
-    protected Button submitBtn;
+	protected Button submitBtn;
 
 	@FXML
 	protected Button cancelBtn;
-	
-    @FXML
-    protected TextField idField;
-    
-    protected void setErrorLbl(String text) {
-    	errorLbl.setText(text);
-    }
+
+	@FXML
+	protected TextField idField;
+
+	protected void setErrorLbl(String text) {
+		errorLbl.setText(text);
+	}
 
 	@FXML
 	void returnHome(ActionEvent event) {

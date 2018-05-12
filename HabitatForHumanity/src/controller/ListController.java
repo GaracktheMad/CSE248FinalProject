@@ -1,14 +1,10 @@
 package controller;
 
 import javafx.fxml.FXML;
-
 import javafx.scene.control.Button;
-
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javafx.event.ActionEvent;
-
 import javafx.scene.control.Label;
 import model.Data;
 import model.Identity;
@@ -17,62 +13,68 @@ import view.FXMLLoadingController;
 
 public class ListController {
 	@FXML
-	private static Label name1;
+	private Label name1;
+
 	@FXML
-	private static Label id1;
+	private Label id1;
+
 	@FXML
 	private Button select1;
+
 	@FXML
-	private static Label name2;
+	private Label name2;
+
 	@FXML
-	private static Label id2;
+	private Label id2;
+
 	@FXML
 	private Button select2;
+
 	@FXML
-	private static Label name3;
+	private Label name3;
+
 	@FXML
-	private static Label id3;
+	private Label id3;
+
 	@FXML
 	private Button select3;
+
 	@FXML
-	private static Label name4;
+	private Label name4;
+
 	@FXML
-	private static Label id4;
+	private Label id4;
+
 	@FXML
 	private Button select4;
+
 	@FXML
-	private static Label name5;
+	private Label name5;
+
 	@FXML
-	private static Label id5;
+	private Label id5;
+
 	@FXML
 	private Button select5;
+
 	@FXML
 	private Button prevButton;
+
 	@FXML
 	private Button homeButton;
+
 	@FXML
 	private Button nextButton;
-	
+
 	private boolean isItemList;
 	private ArrayList<Label> idLabelProcessor;
 	private ArrayList<Label> nameLabelProcessor;
 	private ArrayList<IsListable> elements;
+	private ArrayList<Button> btnProcessor;
 	private int position = 0;
 
-	
-	void init() {
-		idLabelProcessor = new ArrayList<Label>();
-		nameLabelProcessor = new ArrayList<Label>();
-		idLabelProcessor.add(id1);
-		idLabelProcessor.add(id2);
-		idLabelProcessor.add(id3);
-		idLabelProcessor.add(id4);
-		idLabelProcessor.add(id5);
-		nameLabelProcessor.add(name1);
-		nameLabelProcessor.add(name2);
-		nameLabelProcessor.add(name3);
-		nameLabelProcessor.add(name4);
-		nameLabelProcessor.add(name5);
+	public void setItemList(boolean itemList) {
+		isItemList = itemList;
 		if (CurrentUserController.getRank().equals("Admin") && isItemList == false) {
 			if (Data.noUsers() == false) {
 				elements = CurrentUserController.userIsAdmin().listAllUsers();
@@ -97,27 +99,21 @@ public class ListController {
 		populateScreen(0);
 	}
 
-	public void setItemList(boolean itemList) {
-		isItemList = itemList;
-		init();
-	}
-
 	private void populateScreen(int start) {
 		for (int i = 0; i < 5; i++) {
 			try {
 				idLabelProcessor.get(i).setText(elements.get(start).getKey().toString());
 				nameLabelProcessor.get(i).setText(elements.get(start).getName());
+				btnProcessor.get(i).setDisable(false);
 				start++;
-			} catch (IndexOutOfBoundsException e) {
-				for (int ii = i; ii < 5; i++) {
-					idLabelProcessor.get(ii).setText("");
-					nameLabelProcessor.get(ii).setText("");
-					start++;
-				}
-				i = 6;
+			} catch (IndexOutOfBoundsException | NullPointerException e) {
+				idLabelProcessor.get(i).setText(" ");
+				nameLabelProcessor.get(i).setText(" ");
+				btnProcessor.get(i).setDisable(true);
+				start++;
 			}
+			position = start;
 		}
-		position = start;
 	}
 
 	@FXML
@@ -168,8 +164,31 @@ public class ListController {
 		}
 	}
 
+	@FXML
+	void initialize() {
+		assert name1 != null : "fx:id=\"name1\" was not injected: check your FXML file 'List.fxml'.";
+		assert id1 != null : "fx:id=\"id1\" was not injected: check your FXML file 'List.fxml'.";
+		assert select1 != null : "fx:id=\"select1\" was not injected: check your FXML file 'List.fxml'.";
+		assert name2 != null : "fx:id=\"name2\" was not injected: check your FXML file 'List.fxml'.";
+		assert id2 != null : "fx:id=\"id2\" was not injected: check your FXML file 'List.fxml'.";
+		assert select2 != null : "fx:id=\"select2\" was not injected: check your FXML file 'List.fxml'.";
+		assert name3 != null : "fx:id=\"name3\" was not injected: check your FXML file 'List.fxml'.";
+		assert id3 != null : "fx:id=\"id3\" was not injected: check your FXML file 'List.fxml'.";
+		assert select3 != null : "fx:id=\"select3\" was not injected: check your FXML file 'List.fxml'.";
+		assert name4 != null : "fx:id=\"name4\" was not injected: check your FXML file 'List.fxml'.";
+		assert id4 != null : "fx:id=\"id4\" was not injected: check your FXML file 'List.fxml'.";
+		assert select4 != null : "fx:id=\"select4\" was not injected: check your FXML file 'List.fxml'.";
+		assert name5 != null : "fx:id=\"name5\" was not injected: check your FXML file 'List.fxml'.";
+		assert id5 != null : "fx:id=\"id5\" was not injected: check your FXML file 'List.fxml'.";
+		assert select5 != null : "fx:id=\"select5\" was not injected: check your FXML file 'List.fxml'.";
+		assert prevButton != null : "fx:id=\"prevButton\" was not injected: check your FXML file 'List.fxml'.";
+		assert homeButton != null : "fx:id=\"homeButton\" was not injected: check your FXML file 'List.fxml'.";
+		assert nextButton != null : "fx:id=\"nextButton\" was not injected: check your FXML file 'List.fxml'.";
+		initProcessors();
+	}
+
 	private void selectionProcess(int i) {
-		String id = idLabelProcessor.get(i).getText();
+		String id = idLabelProcessor.get(i - 1).getText();
 		if (id != null) {
 			try {
 				FXMLLoadingController.detail(new Identity(id.substring(0, 1), Integer.valueOf(id.substring(1))),
@@ -180,4 +199,25 @@ public class ListController {
 		}
 	}
 
+	private void initProcessors() {
+		idLabelProcessor = new ArrayList<Label>();
+		nameLabelProcessor = new ArrayList<Label>();
+		btnProcessor = new ArrayList<Button>();
+		elements = new ArrayList<IsListable>();
+		idLabelProcessor.add(id1);
+		idLabelProcessor.add(id2);
+		idLabelProcessor.add(id3);
+		idLabelProcessor.add(id4);
+		idLabelProcessor.add(id5);
+		nameLabelProcessor.add(name1);
+		nameLabelProcessor.add(name2);
+		nameLabelProcessor.add(name3);
+		nameLabelProcessor.add(name4);
+		nameLabelProcessor.add(name5);
+		btnProcessor.add(select1);
+		btnProcessor.add(select2);
+		btnProcessor.add(select3);
+		btnProcessor.add(select4);
+		btnProcessor.add(select5);
+	}
 }

@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 import model.Identity;
 import view.FXMLLoadingController;
 
-public class Login {
+public class Login  {
 	@FXML
 	private TextField username;
 
@@ -31,13 +31,16 @@ public class Login {
 	private Button newAccountButton;
 
 	@FXML
-	void handleSubmit(ActionEvent e) {
-		Identity i = new Identity(username.getText().substring(0, 1), Integer.valueOf(username.getText().substring(1)));
+	void handleSubmit(ActionEvent event) {
+		Identity i;
 		boolean state = false;
 		try {
-			state = FXMLLoadingController.loginToTaskPane(i);
-		} catch (IOException e1) {
-			e1.printStackTrace();
+			i = new Identity(username.getText().substring(0, 1), Integer.valueOf(username.getText().substring(1)));
+			state = FXMLLoadingController.loginToTaskPane(i, password.getText());
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
 		}
 		if (state == false) {
 			confirmationLbl.setText("INVALID USERNAME OR PASSWORD");

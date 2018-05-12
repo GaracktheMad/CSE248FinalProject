@@ -5,25 +5,31 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="10.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PopupController">
+
+<StackPane xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PopupController">
    <children>
-      <Label text="Account Created!">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <HBox spacing="20.0">
+      <VBox alignment="CENTER" spacing="10.0">
          <children>
-            <Label text="Username:" />
-            <TextField fx:id="userNameGen" editable="false" />
+            <Label text="Account Created!">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <HBox spacing="20.0">
+               <children>
+                  <Label text="Username:" />
+                  <TextField fx:id="userNameGen" editable="false" />
+               </children>
+            </HBox>
+            <Button fx:id="returnToLogin" mnemonicParsing="false" onAction="#activateLogin" text="Ok" />
          </children>
-      </HBox>
-      <Button fx:id="returnToLogin" mnemonicParsing="false" onAction="#activateLogin" text="Ok" />
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
    </children>
-   <padding>
-      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-   </padding>
-</VBox>
+</StackPane>

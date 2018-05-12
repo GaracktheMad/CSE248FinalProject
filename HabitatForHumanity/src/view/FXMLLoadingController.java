@@ -1,15 +1,14 @@
 package view;
 
 import java.io.IOException;
-
 import controller.CurrentUserController;
-import controller.ItemDetailsPaneController;
+import controller.ItemDetailPaneController;
 import controller.ListController;
 import controller.PopupController;
 import controller.UserDetailPaneController;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import model.Data;
 import model.Identity;
@@ -17,7 +16,7 @@ import model.Identity;
 public class FXMLLoadingController {
 
 	private static Stage stage;
-	private static Parent root;
+	private static StackPane root;
 
 	public static void setStage(Stage s) {
 		stage = s;
@@ -30,9 +29,9 @@ public class FXMLLoadingController {
 		}
 	}
 
-	public static void updateStage() {
-		Scene scene = new Scene(root);
-		stage.setScene(scene);
+	public static void updateStage(StackPane sp) {
+		root.getChildren().setAll(sp);
+		// stage.setScene(new Scene(root));
 	}
 
 	public static void login() throws IOException {
@@ -40,25 +39,26 @@ public class FXMLLoadingController {
 			Data.init();
 		}
 		root = FXMLLoader.load(FXMLLoadingController.class.getResource("Login.fxml"));
-		updateStage();
+		stage.setScene(new Scene(root));
 	}
 
 	public static void popUp(String id) throws IOException {
 		FXMLLoader loader = new FXMLLoader(FXMLLoadingController.class.getResource("Popup.fxml"));
-		root = loader.load();
+		StackPane sp = loader.load();
 		((PopupController) loader.getController()).setUsername(id);
-		updateStage();
+		updateStage(sp);
 	}
 
 	public static boolean taskPane() throws IOException {
 		String answer = CurrentUserController.getRank();
+		StackPane sp;
 		if (answer.equals("Admin")) {
-			root = FXMLLoader.load(FXMLLoadingController.class.getResource("AdministrativeTaskPane.fxml"));
-			updateStage();
+			sp = FXMLLoader.load(FXMLLoadingController.class.getResource("AdministrativeTaskPane.fxml"));
+			updateStage(sp);
 			return true;
 		} else if (answer.equals("Clerk") || answer.equals("ReadOnly")) {
-			root = FXMLLoader.load(FXMLLoadingController.class.getResource("TaskPane.fxml"));
-			updateStage();
+			sp = FXMLLoader.load(FXMLLoadingController.class.getResource("TaskPane.fxml"));
+			updateStage(sp);
 			return true;
 		} else {
 			return false;
@@ -67,58 +67,62 @@ public class FXMLLoadingController {
 
 	public static void list(boolean isItemList) throws IOException {
 		FXMLLoader loader = new FXMLLoader(FXMLLoadingController.class.getResource("List.fxml"));
-		root = loader.load();
+		StackPane sp = loader.load();
 		ListController ctrl = loader.getController();
 		if (isItemList == false && CurrentUserController.getRank().equals("Admin")) {
 			ctrl.setItemList(isItemList);
 		} else {
 			ctrl.setItemList(true);
 		}
-		updateStage();
+		updateStage(sp);
 	}
 
 	public static void createAccount() throws IOException {
-		root = FXMLLoader.load(FXMLLoadingController.class.getResource("CreateAccount.fxml"));
-		updateStage();
+		StackPane sp = FXMLLoader.load(FXMLLoadingController.class.getResource("CreateAccount.fxml"));
+		updateStage(sp);
 	}
 
 	public static void detail(Identity identity, boolean isItemList) {
 		if (isItemList == false && CurrentUserController.getRank().equals("Admin")) {
 			FXMLLoader loader = new FXMLLoader(FXMLLoadingController.class.getResource("UserDetailPane.fxml"));
 			try {
-				root = loader.load();
+				StackPane sp = loader.load();
 				UserDetailPaneController ctrl = loader.getController();
 				ctrl.setIdentity(identity);
-				updateStage();
+				updateStage(sp);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		} else {
 			FXMLLoader loader = new FXMLLoader(FXMLLoadingController.class.getResource("ItemDetailPane.fxml"));
 			try {
-				root = loader.load();
-				ItemDetailsPaneController ctrl = loader.getController();
+				StackPane sp = loader.load();
+				ItemDetailPaneController ctrl = loader.getController();
 				ctrl.data(identity, stage);
-				updateStage();
+				updateStage(sp);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 	}
 
-	public static boolean loginToTaskPane(Identity i) throws IOException {
-		CurrentUserController.set(i);
+	public static boolean loginToTaskPane(Identity i, String password) throws IOException {
+		boolean status = CurrentUserController.set(i);
+		if (status == false || CurrentUserController.getUser().verifyPass(password) == false) {
+			CurrentUserController.logout();
+			return false;
+		}
 		return taskPane();
 	}
 
 	public static void createUser() throws IOException {
-		root = FXMLLoader.load(FXMLLoadingController.class.getResource("CreateUser.fxml"));
-		updateStage();
+		StackPane sp = FXMLLoader.load(FXMLLoadingController.class.getResource("CreateUser.fxml"));
+		updateStage(sp);
 	}
 
 	public static void createItem() throws IOException {
-		root = FXMLLoader.load(FXMLLoadingController.class.getResource("CreateItem.fxml"));
-		updateStage();
+		StackPane sp = FXMLLoader.load(FXMLLoadingController.class.getResource("CreateItem.fxml"));
+		updateStage(sp);
 	}
 
 }

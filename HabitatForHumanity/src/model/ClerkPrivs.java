@@ -1,8 +1,15 @@
 package model;
 
+import java.io.IOException;
+
 public interface ClerkPrivs {
 	public default void createItem(Item i) {
 		Data.addItem(new Item(i, i.getKey()));
+		try {
+			Data.save();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public default boolean changeName(Identity key, String name) {
@@ -10,6 +17,11 @@ public interface ClerkPrivs {
 			return false;
 		}
 		Data.getItem(key).setName(name);
+		try {
+			Data.save();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return true;
 	}
 
@@ -18,21 +30,37 @@ public interface ClerkPrivs {
 			return false;
 		}
 		Data.getItem(key).setPrice(p);
+		try {
+			Data.save();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return true;
 	}
-	
+
 	public default boolean changeImage(Identity key, String loc) {
 		if (Data.checkItemKey(key) == false) {
 			return false;
 		}
-		return Data.getItem(key).setPhoto(loc);		
+		Data.getItem(key).setPhoto(loc);
+		try {
+			Data.save();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return true;
 	}
-	
+
 	public default boolean changeQuantity(Identity key, int i) {
-		if(Data.checkItemKey(key) == false) {
+		if (Data.checkItemKey(key) == false) {
 			return false;
 		}
 		Data.getItem(key).setQuantity(i);
+		try {
+			Data.save();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return true;
 	}
 

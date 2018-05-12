@@ -14,8 +14,11 @@ public class CurrentUserController {
 	private static User u;
 	private static String rank;
 
-	public static void set(Identity i) {
-		u = Data.getCopyUser(i);
+	public static boolean set(Identity key) {
+		if(Data.checkUserKey(key) == false) {
+			return false;
+		}
+		u = Data.getCopyUser(key);
 		if (u instanceof Admin) {
 			rank = "Admin";
 		} else if (u instanceof Clerk) {
@@ -25,6 +28,7 @@ public class CurrentUserController {
 		} else {
 			rank = "error";
 		}
+		return true;
 	}
 	
 	public static User getUser() {

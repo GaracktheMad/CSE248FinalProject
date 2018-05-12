@@ -10,6 +10,7 @@ import model.AdminPrivs;
 import model.Clerk;
 import model.Data;
 import model.Identity;
+import model.ReadOnly;
 import model.User;
 import view.FXMLLoadingController;
 import java.io.IOException;
@@ -129,8 +130,8 @@ public class UserDetailPaneController {
 				currentUser.removeUser(identity);
 				currentUser.createUser(c);
 			} else if (rankField.getText().equalsIgnoreCase("ReadOnly") == true) {
-				Admin ro;
-				ro = new Admin(u, u.getKey());
+				ReadOnly ro;
+				ro = new ReadOnly(u, u.getKey());
 				currentUser.removeUser(identity);
 				currentUser.createUser(ro);
 			}

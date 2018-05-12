@@ -1,7 +1,9 @@
 package controller;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import model.Data;
 import view.FXMLLoadingController;
 
 public interface IsTaskPane {
@@ -9,9 +11,11 @@ public interface IsTaskPane {
 	default void exit(){
 		CurrentUserController.logout();
 		try {
-			FXMLLoadingController.login();
+			Data.save();FXMLLoadingController.login();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 		} catch (IOException e) {
-			System.exit(0);
+			e.printStackTrace();
 		}
 	}
 	default int changePassword(String original, String newPass, String repeat) {

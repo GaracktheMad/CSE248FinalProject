@@ -143,8 +143,8 @@ public class ListController {
 
 	@FXML
 	void populateLast(ActionEvent event) {
-		if (position - 5 >= 0) {
-			populateScreen(position - 5);
+		if (position - 10 >= 0) {
+			populateScreen(position - 10);
 		}
 	}
 

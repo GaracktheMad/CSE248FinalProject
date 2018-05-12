@@ -156,4 +156,19 @@ public class Data {
 		return new Item(i, key);
 	}
 
+	public static int changePassword(Identity key, String original, String newPass, String repeat) {
+		if(checkUserKey(key) == false) {
+			return -2;
+		}
+		User u = users.get(key);
+		if (newPass.equals(repeat) == false) {
+			return 0;
+		} else if (u.verifyPass(original) == true) {
+			u.setPassword(newPass);
+			return 1;
+		} else {
+			return -1;
+		}		
+	}
+
 }

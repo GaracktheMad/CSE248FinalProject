@@ -31,7 +31,6 @@ public class FXMLLoadingController {
 
 	public static void updateStage(StackPane sp) {
 		root.getChildren().setAll(sp);
-		// stage.setScene(new Scene(root));
 	}
 
 	public static void login() throws IOException {

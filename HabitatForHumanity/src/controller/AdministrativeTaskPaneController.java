@@ -1,18 +1,16 @@
 package controller;
 
 import javafx.fxml.FXML;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import model.Data;
 import view.FXMLLoadingController;
-
 import java.io.IOException;
-
 import javafx.event.ActionEvent;
 
-public class AdministrativeTaskPaneController implements IsTaskPane {
+public class AdministrativeTaskPaneController implements LogsOut {
 	@FXML
 	private Button userManagementButton;
 	@FXML
@@ -47,13 +45,18 @@ public class AdministrativeTaskPaneController implements IsTaskPane {
 
 	@FXML
 	void attemptPassChange(ActionEvent event) {
-		int result = changePassword(currentPass.getText(), newPass.getText(), newPassRetype.getText());
+		int result = CurrentUserController.setPassword(currentPass.getText(), newPass.getText(), newPassRetype.getText());
 		if (result == 0) {
 			changePassLbl.setText("New Passwords Do Not Match!");
 		} else if (result == -1) {
 			changePassLbl.setText("PASSWORD NOT RECOGNIZED");
 		} else if (result == 1) {
 			changePassLbl.setText("Success!");
+			try {
+				Data.save();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		} else {
 			changePassLbl.setText("ERROR");
 		}
@@ -91,10 +94,10 @@ public class AdministrativeTaskPaneController implements IsTaskPane {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@FXML
-    void initialize() {
-    	userIDBox.setText(CurrentUserController.getID().toString());
-    }
+	void initialize() {
+		userIDBox.setText(CurrentUserController.getID().toString());
+	}
 
 }

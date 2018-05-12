@@ -44,8 +44,8 @@ public abstract class User implements Stringable, Serializable, IsListable {
 		return password;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPassword(String pass) {
+		password = pass;
 	}
 
 	public Identity getKey() {

@@ -19,6 +19,9 @@ public class CurrentUserController {
 			return false;
 		}
 		u = Data.getCopyUser(key);
+		if(!u.getKey().equals(key)) {
+			return false;
+		}
 		if (u instanceof Admin) {
 			rank = "Admin";
 		} else if (u instanceof Clerk) {
@@ -74,8 +77,8 @@ public class CurrentUserController {
 		return u.verifyPass(password);
 	}
 	
-	public static void setPassword(String password) {
-		u.setPassword(password);
+	public static int setPassword(String original, String newPass, String repeat) {
+		return Data.changePassword(u.getKey(), original, newPass, repeat);
 	}
 
 }

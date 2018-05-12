@@ -44,15 +44,14 @@ public class UserDetailPaneController {
 
 	private void swapMode() {
 		saveBtn.setDisable(!saveBtn.isDisabled());
-		passChangeBox.setDisable(!passChangeBox.isDisabled());
 		editBtn.setDisable(!editBtn.isDisabled());
+		passChangeBox.setVisible(!passChangeBox.isVisible());
 		backBtn.setDisable(!backBtn.isDisabled());
 		homeBtn.setDisable(!homeBtn.isDisabled());
 		emailField.setEditable(!emailField.isEditable());
 		rankField.setEditable(!rankField.isEditable());
 		if (sameAsUser == false) {
 			deleteBtn.setDisable(!deleteBtn.isDisabled());
-			deleteBtn.setVisible(!deleteBtn.isVisible());
 		}
 	}
 
@@ -144,7 +143,7 @@ public class UserDetailPaneController {
 		idField.setText(userItems.pop());
 		emailField.setText(userItems.pop());
 		rankField.setText(userItems.pop());
-		if (CurrentUserController.getUser().getKey() != identity) {
+		if (CurrentUserController.getID().equals(identity)) {
 			sameAsUser = true;
 		}
 	}

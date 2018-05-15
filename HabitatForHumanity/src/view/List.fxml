@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-
 <StackPane xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ListController">
    <children>
       <VBox alignment="CENTER" spacing="10.0">
@@ -47,11 +46,11 @@
                   <Button fx:id="select5" mnemonicParsing="false" onAction="#detailSelect5" text="Select" />
                </children>
             </HBox>
-            <HBox spacing="50.0">
+            <HBox alignment="CENTER" spacing="50.0">
                <children>
-                  <Button fx:id="prevButton" mnemonicParsing="false" onAction="#populateLast" text="Previous" />
-                  <Button fx:id="homeButton" mnemonicParsing="false" onAction="#returnToTaskPane" text="Home" />
-                  <Button fx:id="nextButton" mnemonicParsing="false" onAction="#populateNextPage" text="  Next  " />
+                  <Button fx:id="prevButton" alignment="CENTER" mnemonicParsing="false" onAction="#populateLast" text="Previous" />
+                  <Button fx:id="homeButton" alignment="CENTER" mnemonicParsing="false" onAction="#returnToTaskPane" text="Home" />
+                  <Button fx:id="nextButton" alignment="CENTER" mnemonicParsing="false" onAction="#populateNextPage" text="  Next  " />
                </children>
                <padding>
                   <Insets top="15.0" />

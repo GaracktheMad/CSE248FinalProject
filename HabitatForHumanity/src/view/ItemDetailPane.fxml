@@ -14,27 +14,27 @@
    <children>
       <BorderPane prefWidth="450.0">
          <center>
-            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="25.0">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="25.0">
                      <children>
                         <Label text="Name" />
                         <TextField fx:id="nameField" editable="false" />
                      </children>
                   </HBox>
-                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
                      <children>
                         <Label layoutX="10.0" layoutY="10.0" text="ID Code" />
                         <TextField fx:id="idField" editable="false" layoutX="38.0" layoutY="10.0" />
                      </children>
                   </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="31.0">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="31.0">
                      <children>
                         <Label text="Price" />
                         <TextField fx:id="priceField" editable="false" />
                      </children>
                   </HBox>
-                  <HBox layoutX="30.0" layoutY="144.0" prefHeight="100.0" prefWidth="200.0" spacing="31.0">
+                  <HBox alignment="CENTER" layoutX="30.0" layoutY="144.0" prefHeight="100.0" prefWidth="200.0" spacing="31.0">
                      <children>
                         <Label text="Quantity" />
                         <TextField fx:id="quantityField" editable="false" />

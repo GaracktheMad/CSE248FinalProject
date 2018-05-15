@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-
 <StackPane xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UserDetailPaneController">
    <children>
       <BorderPane prefWidth="450.0">
@@ -31,7 +30,7 @@
          <center>
             <VBox spacing="25.0" BorderPane.alignment="CENTER">
                <children>
-                  <HBox spacing="50.0">
+                  <HBox alignment="CENTER" spacing="50.0">
                      <children>
                         <Label text="Email">
                            <HBox.margin>
@@ -41,7 +40,7 @@
                         <TextField fx:id="emailField" editable="false" />
                      </children>
                   </HBox>
-                  <HBox layoutX="10.0" layoutY="10.0" spacing="35.0">
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" spacing="35.0">
                      <children>
                         <Label layoutX="10.0" layoutY="10.0" text="ID Code" />
                         <TextField fx:id="idField" editable="false" layoutX="38.0" layoutY="10.0">
@@ -51,7 +50,7 @@
                         </TextField>
                      </children>
                   </HBox>
-                  <HBox layoutX="30.0" layoutY="80.0" spacing="51.0">
+                  <HBox alignment="CENTER" layoutX="30.0" layoutY="80.0" spacing="51.0">
                      <children>
                         <Label layoutX="10.0" layoutY="10.0" text="Rank" />
                         <TextField fx:id="rankField" editable="false" layoutX="38.0" layoutY="10.0">
@@ -61,7 +60,7 @@
                         </TextField>
                      </children>
                   </HBox>
-                  <VBox fx:id="passChangeBox" visible="false">
+                  <VBox fx:id="passChangeBox" alignment="CENTER" visible="false">
                      <children>
                         <Label text="Force Password Change" />
                         <PasswordField fx:id="passchangeField" />

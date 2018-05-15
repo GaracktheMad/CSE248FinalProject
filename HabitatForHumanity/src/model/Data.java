@@ -137,9 +137,7 @@ public class Data {
 		try {
 			ObjectInputStream in = new ObjectInputStream(new FileInputStream(new File("Data.bin")));
 			users = (Hashtable<Identity, User>) in.readObject();
-			System.out.println(users.get(new Identity("A", 0000000001)).getPassword());
 			User.setCounterState(in.readInt());
-			System.out.println(User.getCounterState());
 			items = (Hashtable<Identity, Item>) in.readObject();
 			Item.setCounterState(in.readInt());
 			in.close();

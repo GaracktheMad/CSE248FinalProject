@@ -2,7 +2,7 @@ package model;
 
 import java.util.Stack;
 
-public class Clerk extends User implements ReadOnlyPrivs, ClerkPrivs {
+public class Clerk extends User implements ReadOnlyPrivs, ClerkPrivs, OrderManipulationPrivs {
 
 	/**
 	 * 
@@ -14,7 +14,7 @@ public class Clerk extends User implements ReadOnlyPrivs, ClerkPrivs {
 	}
 
 	public Clerk(User c, Identity key) {
-		super(c.getName(), c.getPassword(), key);
+		super(c.getName(), c.getPassword(), key, c.getOrderList());
 	}
 
 	/**

@@ -2,7 +2,7 @@ package model;
 
 import java.util.Stack;
 
-public class ReadOnly extends User implements ReadOnlyPrivs {
+public class ReadOnly extends User implements CanOrder, ReadOnlyPrivs {
 	/**
 	 * 
 	 */
@@ -13,7 +13,7 @@ public class ReadOnly extends User implements ReadOnlyPrivs {
 	}
 
 	public ReadOnly(User r, Identity key) {
-		super(r.getName(), r.getPassword(), key);
+		super(r.getName(), r.getPassword(), key, r.getOrderList());
 	}
 
 	/**

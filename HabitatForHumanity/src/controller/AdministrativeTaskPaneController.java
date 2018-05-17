@@ -6,17 +6,27 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import model.Data;
+import model.InvalidListTypeException;
 import view.FXMLLoadingController;
+
 import java.io.IOException;
 import javafx.event.ActionEvent;
 
 public class AdministrativeTaskPaneController implements LogsOut {
 	@FXML
+	private Button productViewBtn;
+	@FXML
 	private Button userManagementButton;
 	@FXML
 	private Button createUserBtn;
 	@FXML
-	private Button productViewBtn;
+	private Button createItemBtn;
+	@FXML
+	private Button myOrders;
+	@FXML
+	private Button manageOrders;
+	@FXML
+	private Button invoiceBtn;
 	@FXML
 	private TextField userIDBox;
 	@FXML
@@ -31,21 +41,49 @@ public class AdministrativeTaskPaneController implements LogsOut {
 	private Button submitButton;
 	@FXML
 	private Button exitButton;
-	@FXML
-	private Button createItemBtn;
 
 	@FXML
-	void activateProductList(ActionEvent event) {
+	void activateMyOrders(ActionEvent event) {
 		try {
-			FXMLLoadingController.list(true);
+			FXMLLoadingController.list("my orders");
+		} catch (IOException | InvalidListTypeException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@FXML
+	void masterInvoiceGen(ActionEvent event) {
+		try {
+			FXMLLoadingController.invoiceGen();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	@FXML
+	void orderManagement(ActionEvent event) {
+		try {
+			FXMLLoadingController.list("orders");
+		} catch (IOException | InvalidListTypeException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@FXML
+	void activateProductList(ActionEvent event) {
+		try {
+			FXMLLoadingController.list("Items");
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InvalidListTypeException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@FXML
 	void attemptPassChange(ActionEvent event) {
-		int result = CurrentUserController.setPassword(currentPass.getText(), newPass.getText(), newPassRetype.getText());
+		int result = CurrentUserController.setPassword(currentPass.getText(), newPass.getText(),
+				newPassRetype.getText());
 		if (result == 0) {
 			changePassLbl.setText("New Passwords Do Not Match!");
 		} else if (result == -1) {
@@ -89,8 +127,10 @@ public class AdministrativeTaskPaneController implements LogsOut {
 	@FXML
 	void activateUserList(ActionEvent event) {
 		try {
-			FXMLLoadingController.list(false);
+			FXMLLoadingController.list("Users");
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InvalidListTypeException e) {
 			e.printStackTrace();
 		}
 	}

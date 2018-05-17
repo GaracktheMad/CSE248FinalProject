@@ -4,78 +4,63 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import model.Data;
 import model.Identity;
+import model.InvalidListTypeException;
 import model.IsListable;
 import view.FXMLLoadingController;
 
 public class ListController {
 	@FXML
 	private Label name1;
-
 	@FXML
 	private Label id1;
-
 	@FXML
 	private Button select1;
-
 	@FXML
 	private Label name2;
-
 	@FXML
 	private Label id2;
-
 	@FXML
 	private Button select2;
-
 	@FXML
 	private Label name3;
-
 	@FXML
 	private Label id3;
-
 	@FXML
 	private Button select3;
-
 	@FXML
 	private Label name4;
-
 	@FXML
 	private Label id4;
-
 	@FXML
 	private Button select4;
-
 	@FXML
 	private Label name5;
-
 	@FXML
 	private Label id5;
-
 	@FXML
 	private Button select5;
-
 	@FXML
 	private Button prevButton;
-
 	@FXML
 	private Button homeButton;
-
 	@FXML
 	private Button nextButton;
 
-	private boolean isItemList;
+	private String listType;
 	private ArrayList<Label> idLabelProcessor;
 	private ArrayList<Label> nameLabelProcessor;
 	private ArrayList<IsListable> elements;
 	private ArrayList<Button> btnProcessor;
 	private int position = 0;
 
-	public void setItemList(boolean itemList) {
-		isItemList = itemList;
-		if (CurrentUserController.getRank().equals("Admin") && isItemList == false) {
+	public void setItemList(String objectListed) throws InvalidListTypeException {
+		listType = objectListed;
+		if (CurrentUserController.getRank().equals("Admin") && listType.equalsIgnoreCase("Users")) {
 			if (Data.noUsers() == false) {
 				elements = CurrentUserController.userIsAdmin().listAllUsers();
 			} else {
@@ -85,7 +70,7 @@ public class ListController {
 					e.printStackTrace();
 				}
 			}
-		} else {
+		} else if (listType.equalsIgnoreCase("Items")) {
 			if (Data.noItems() == false) {
 				elements = CurrentUserController.userViewsItemList().listAllItems();
 			} else {
@@ -95,6 +80,28 @@ public class ListController {
 					e.printStackTrace();
 				}
 			}
+		} else if (listType.equalsIgnoreCase("my Orders")) {
+			if (CurrentUserController.getUser().noOrders() == false) {
+				elements = CurrentUserController.getOrders();
+			} else {
+				try {
+					FXMLLoadingController.taskPane();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		} else if (listType.equalsIgnoreCase("orders") && CurrentUserController.hasOrderManipulationPrivs()) {
+			if (Data.noOrders() == false) {
+				elements = CurrentUserController.userManipulatesOrders().listAllOrders();
+			} else {
+				try {
+					FXMLLoadingController.taskPane();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		} else {
+			throw new InvalidListTypeException();
 		}
 		populateScreen(0);
 	}
@@ -192,7 +199,7 @@ public class ListController {
 		if (id != null) {
 			try {
 				FXMLLoadingController.detail(new Identity(id.substring(0, 1), Integer.valueOf(id.substring(1))),
-						isItemList);
+						listType);
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
 			}

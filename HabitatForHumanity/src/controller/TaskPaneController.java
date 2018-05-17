@@ -4,7 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import model.Data;
+import model.InvalidListTypeException;
 import view.FXMLLoadingController;
+
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
@@ -29,19 +31,55 @@ public class TaskPaneController implements LogsOut {
 	private Button exitButton;
 	@FXML
 	private Button createItemBtn;
+	@FXML
+	private Button myOrders;
+	@FXML
+	private Button manageOrders;
+	@FXML
+	private Button invoiceBtn;
 
 	@FXML
-	void activateProductList(ActionEvent event) {
+	void activateMyOrders(ActionEvent event) {
 		try {
-			FXMLLoadingController.list(true);
+			FXMLLoadingController.list("my orders");
+		} catch (IOException | InvalidListTypeException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@FXML
+	void masterInvoiceGen(ActionEvent event) {
+		try {
+			FXMLLoadingController.invoiceGen();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	@FXML
+	void orderManagement(ActionEvent event) {
+		try {
+			FXMLLoadingController.list("orders");
+		} catch (IOException | InvalidListTypeException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@FXML
+	void activateProductList(ActionEvent event) {
+		try {
+			FXMLLoadingController.list("Items");
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InvalidListTypeException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@FXML
 	void attemptPassChange(ActionEvent event) {
-		int result = CurrentUserController.setPassword(currentPass.getText(), newPass.getText(), newPassRetype.getText());
+		int result = CurrentUserController.setPassword(currentPass.getText(), newPass.getText(),
+				newPassRetype.getText());
 		if (result == 0) {
 			changePassLbl.setText("New Passwords Do Not Match!");
 		} else if (result == -1) {
@@ -78,6 +116,10 @@ public class TaskPaneController implements LogsOut {
 		if (CurrentUserController.userIsClerk() != null) {
 			createItemBtn.setVisible(true);
 			createItemBtn.setDisable(false);
+			invoiceBtn.setVisible(true);
+			invoiceBtn.setDisable(false);
+			manageOrders.setVisible(true);
+			manageOrders.setDisable(false);
 		}
 		userIDBox.setText(CurrentUserController.getID().toString());
 	}

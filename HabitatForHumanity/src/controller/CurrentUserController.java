@@ -1,11 +1,14 @@
 package controller;
 
+import java.util.ArrayList;
 import model.Admin;
 import model.AdminPrivs;
 import model.Clerk;
 import model.ClerkPrivs;
 import model.Data;
 import model.Identity;
+import model.IsListable;
+import model.OrderManipulationPrivs;
 import model.ReadOnly;
 import model.ReadOnlyPrivs;
 import model.User;
@@ -15,11 +18,11 @@ public class CurrentUserController {
 	private static String rank;
 
 	public static boolean set(Identity key) {
-		if(Data.checkUserKey(key) == false) {
+		if (Data.checkUserKey(key) == false) {
 			return false;
 		}
 		u = Data.getCopyUser(key);
-		if(!u.getKey().equals(key)) {
+		if (!u.getKey().equals(key)) {
 			return false;
 		}
 		if (u instanceof Admin) {
@@ -33,13 +36,16 @@ public class CurrentUserController {
 		}
 		return true;
 	}
-	
+
 	public static User getUser() {
 		return u;
 	}
-	
+
 	public static Identity getID() {
 		return u.getKey();
+	}
+	public static ArrayList<IsListable> getOrders() {
+		return u.listAllMyOrders();
 	}
 
 	public static void logout() {
@@ -60,25 +66,39 @@ public class CurrentUserController {
 		}
 		return null;
 	}
-	
+
 	public static ReadOnlyPrivs userViewsItemList() {
-		if(u instanceof ReadOnlyPrivs) {
+		if (u instanceof ReadOnlyPrivs) {
 			return (ReadOnlyPrivs) u;
 		}
 		return null;
-		
+
 	}
 
 	public static String getRank() {
 		return rank;
 	}
-	
+
 	public static boolean checkPass(String password) {
 		return u.verifyPass(password);
 	}
-	
+
 	public static int setPassword(String original, String newPass, String repeat) {
 		return Data.changePassword(u.getKey(), original, newPass, repeat);
+	}
+
+	public static boolean hasOrderManipulationPrivs() {
+		if (u instanceof OrderManipulationPrivs) {
+			return true;
+		}
+		return false;
+	}
+
+	public static OrderManipulationPrivs userManipulatesOrders() {
+		if(u instanceof OrderManipulationPrivs) {
+			return (OrderManipulationPrivs) u;
+		}
+		return null;
 	}
 
 }

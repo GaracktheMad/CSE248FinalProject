@@ -15,41 +15,33 @@ import javafx.stage.Stage;
 import model.ClerkPrivs;
 import model.Data;
 import model.Identity;
+import model.InvalidListTypeException;
 import model.Item;
-import model.User;
 import view.FXMLLoadingController;
 
 public class ItemDetailPaneController {
 	@FXML
 	private TextField nameField;
-
 	@FXML
 	private TextField idField;
-
 	@FXML
 	private TextField priceField;
-
 	@FXML
 	private TextField quantityField;
-
 	@FXML
 	private Button deleteBtn;
-
+	@FXML
+    private Button orderBtn;
 	@FXML
 	private Button homeBtn;
-
 	@FXML
 	private Button editBtn;
-
 	@FXML
 	private Button backBtn;
-
 	@FXML
 	private Button setImageBtn;
-
 	@FXML
 	private ImageView imgField;
-
 	@FXML
 	private Button saveBtn;
 
@@ -72,13 +64,21 @@ public class ItemDetailPaneController {
 		thisStage = stage;
 		init();
 	}
+	
+	@FXML
+    void order(ActionEvent event) {
+		FXMLLoadingController.order(identity);
+    }
+
 
 	@FXML
 	void deleteThis(ActionEvent event) {
 		CurrentUserController.userIsClerk().removeItem(identity);
 		try {
-			FXMLLoadingController.list(true);
+			FXMLLoadingController.list("Items");
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InvalidListTypeException e) {
 			e.printStackTrace();
 		}
 	}
@@ -91,8 +91,10 @@ public class ItemDetailPaneController {
 	@FXML
 	void goBack(ActionEvent event) {
 		try {
-			FXMLLoadingController.list(true);
+			FXMLLoadingController.list("Items");
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InvalidListTypeException e) {
 			e.printStackTrace();
 		}
 	}
@@ -170,8 +172,7 @@ public class ItemDetailPaneController {
 		assert setImageBtn != null : "fx:id=\"setImageBtn\" was not injected: check your FXML file 'ItemDetailsPane.fxml'.";
 		assert imgField != null : "fx:id=\"imgField\" was not injected: check your FXML file 'ItemDetailsPane.fxml'.";
 		assert saveBtn != null : "fx:id=\"saveBtn\" was not injected: check your FXML file 'ItemDetailsPane.fxml'.";
-		User u = CurrentUserController.getUser();
-		if (u instanceof ClerkPrivs) {
+		if (CurrentUserController.getUser() instanceof ClerkPrivs) {
 			saveBtn.setVisible(true);
 			editBtn.setVisible(true);
 			editBtn.setDisable(false);

@@ -11,79 +11,96 @@
 <?import javafx.scene.layout.VBox?>
 
 <StackPane xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TaskPaneController">
-   <children>
-      <BorderPane prefWidth="500.0">
-         <top>
-            <HBox alignment="CENTER_RIGHT" BorderPane.alignment="CENTER_RIGHT">
-               <BorderPane.margin>
-                  <Insets bottom="10.0" top="5.0" />
-               </BorderPane.margin>
-               <children>
-                  <Button fx:id="createItemBtn" disable="true" mnemonicParsing="false" onAction="#createItem" text="Create Items" visible="false" />
-                  <Button fx:id="productViewBtn" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#activateProductList" text="View Products">
-                     <opaqueInsets>
-                        <Insets bottom="50.0" />
-                     </opaqueInsets>
-                  </Button>
-               </children>
-            </HBox>
-         </top>
-         <center>
-            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-               <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Label text="My User ID:" />
-                        <TextField fx:id="userIDBox" editable="false" />
-                     </children>
-                  </HBox>
-                  <Label fx:id="changePassLbl" alignment="CENTER" contentDisplay="CENTER" text="Change Password" textAlignment="CENTER" underline="true">
-                     <padding>
-                        <Insets bottom="10.0" />
-                     </padding>
-                  </Label>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Label text="Current Password        ">
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </Label>
-                        <PasswordField fx:id="currentPass" />
-                     </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </HBox>
-                  <HBox layoutX="10.0" layoutY="27.0" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Label text="New Password             " />
-                        <PasswordField fx:id="newPass">
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </PasswordField>
-                     </children>
-                  </HBox>
-                  <HBox layoutX="10.0" layoutY="27.0" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Label text="Retype New Password" />
-                        <PasswordField fx:id="newPassRetype" />
-                     </children>
-                  </HBox>
-                  <Button fx:id="submitButton" mnemonicParsing="false" onAction="#attemptPassChange" text="Submit" />
-               </children>
-            </VBox>
-         </center>
-         <bottom>
-            <Button fx:id="exitButton" cancelButton="true" mnemonicParsing="false" onAction="#logout" text="Exit" BorderPane.alignment="BOTTOM_RIGHT" />
-         </bottom>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <StackPane.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </StackPane.margin>
-      </BorderPane>
-   </children>
+	<children>
+		<BorderPane prefWidth="500.0">
+			<top>
+				<VBox BorderPane.alignment="CENTER_RIGHT">
+					<BorderPane.margin>
+						<Insets bottom="5.0" top="5.0" />
+					</BorderPane.margin>
+					<children>
+						<HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" spacing="5.0">
+							<children>
+								<Button fx:id="manageOrders" disable="true" mnemonicParsing="false" onAction="#orderManagement" text="Manage Orders" visible="false" />
+								<Button fx:id="invoiceBtn" disable="true" mnemonicParsing="false" onAction="#masterInvoiceGen" text="Create Master Invoice" visible="false" />
+								<Button fx:id="myOrders" mnemonicParsing="false" onAction="#activateMyOrders" text="My Orders" />
+							</children>
+							<opaqueInsets>
+								<Insets />
+							</opaqueInsets>
+							<padding>
+								<Insets bottom="10.0" top="5.0" />
+							</padding>
+						</HBox>
+						<HBox alignment="CENTER_RIGHT" spacing="5.0">
+							<children>
+								<Button fx:id="createItemBtn" disable="true" mnemonicParsing="false" onAction="#createItem" text="Create Items" visible="false" />
+								<Button fx:id="productViewBtn" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#activateProductList" text="View Products">
+									<opaqueInsets>
+										<Insets bottom="50.0" />
+									</opaqueInsets>
+								</Button>
+							</children>
+						</HBox>
+					</children>
+				</VBox>
+			</top>
+			<center>
+				<VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+					<children>
+						<HBox prefHeight="100.0" prefWidth="200.0">
+							<children>
+								<Label text="My User ID:" />
+								<TextField fx:id="userIDBox" editable="false" />
+							</children>
+						</HBox>
+						<Label fx:id="changePassLbl" alignment="CENTER" contentDisplay="CENTER" text="Change Password" textAlignment="CENTER" underline="true">
+							<padding>
+								<Insets bottom="10.0" />
+							</padding>
+						</Label>
+						<HBox prefHeight="100.0" prefWidth="200.0">
+							<children>
+								<Label text="Current Password        ">
+									<opaqueInsets>
+										<Insets />
+									</opaqueInsets>
+								</Label>
+								<PasswordField fx:id="currentPass" />
+							</children>
+							<opaqueInsets>
+								<Insets />
+							</opaqueInsets>
+						</HBox>
+						<HBox layoutX="10.0" layoutY="27.0" prefHeight="100.0" prefWidth="200.0">
+							<children>
+								<Label text="New Password             " />
+								<PasswordField fx:id="newPass">
+									<opaqueInsets>
+										<Insets />
+									</opaqueInsets>
+								</PasswordField>
+							</children>
+						</HBox>
+						<HBox layoutX="10.0" layoutY="27.0" prefHeight="100.0" prefWidth="200.0">
+							<children>
+								<Label text="Retype New Password" />
+								<PasswordField fx:id="newPassRetype" />
+							</children>
+						</HBox>
+						<Button fx:id="submitButton" mnemonicParsing="false" onAction="#attemptPassChange" text="Submit" />
+					</children>
+				</VBox>
+			</center>
+			<bottom>
+				<Button fx:id="exitButton" cancelButton="true" mnemonicParsing="false" onAction="#logout" text="Exit" BorderPane.alignment="BOTTOM_RIGHT" />
+			</bottom>
+			<opaqueInsets>
+				<Insets />
+			</opaqueInsets>
+			<StackPane.margin>
+				<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+			</StackPane.margin>
+		</BorderPane>
+	</children>
 </StackPane>

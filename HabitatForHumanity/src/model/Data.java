@@ -13,6 +13,7 @@ import java.util.Iterator;
 public class Data {
 	private static Hashtable<Identity, User> users = new Hashtable<Identity, User>();
 	private static Hashtable<Identity, Item> items = new Hashtable<Identity, Item>();
+	private static Hashtable<Identity, Order> orders = new Hashtable<Identity, Order>();
 
 	public static void init() {
 		if (users.isEmpty() == true) {
@@ -27,6 +28,10 @@ public class Data {
 
 	public static boolean noUsers() {
 		return users.isEmpty();
+	}
+
+	public static boolean noOrders() {
+		return orders.isEmpty();
 	}
 
 	static void addUser(User u) {
@@ -47,6 +52,15 @@ public class Data {
 		}
 	}
 
+	static void addOrder(Order o) {
+		orders.put(o.getKey(), o);
+		try {
+			save();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	static void addItem(Item i) {
 		items.put(i.getKey(), i);
 		try {
@@ -56,8 +70,8 @@ public class Data {
 		}
 	}
 
-	static boolean removeItem(Identity i) {
-		if (items.remove(i) == null) {
+	static boolean removeUser(Identity key) {
+		if (users.remove(key) == null) {
 			return false;
 		}
 		try {
@@ -68,8 +82,23 @@ public class Data {
 		return true;
 	}
 
-	static boolean removeUser(Identity i) {
-		if (users.remove(i) == null) {
+	static boolean removeOrder(Order o) {
+		if (orders.remove(o.getKey()) == null) {
+			return false;
+		}
+		Item i = items.get(o.getItem());
+		i.setQuantity(i.getQuantity() + o.getQuantity());
+		users.get(o.getPerson()).removeOrder(o.getKey());
+		try {
+			save();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return true;
+	}
+
+	static boolean removeItem(Identity key) {
+		if (items.remove(key) == null) {
 			return false;
 		}
 		try {
@@ -103,19 +132,41 @@ public class Data {
 		}
 	}
 
+	static Order getOrder(Identity key) {
+		return orders.get(key);
+	}
+
+	public static Order getCopyOrder(Identity key) {
+		Order o = orders.get(key);
+		return new Order(o, key);
+	}
+
 	static Item getItem(Identity key) {
 		return items.get(key);
 	}
 
-	public static Iterator<Identity> getItemKeys() {
-		return items.keySet().iterator();
+	public static Item getCopyItem(Identity key) {
+		Item i = items.get(key);
+		return new Item(i, key);
 	}
 
 	public static Iterator<Identity> getUserKeys() {
 		return users.keySet().iterator();
 	}
 
+	public static Iterator<Identity> getOrderKeys() {
+		return orders.keySet().iterator();
+	}
+
+	public static Iterator<Identity> getItemKeys() {
+		return items.keySet().iterator();
+	}
+
 	public static boolean checkUserKey(Identity key) {
+		return users.containsKey(key);
+	}
+
+	public static boolean checkOrderKey(Identity key) {
 		return users.containsKey(key);
 	}
 
@@ -129,6 +180,8 @@ public class Data {
 		out.writeInt(User.getCounterState());
 		out.writeObject(items);
 		out.writeInt(Item.getCounterState());
+		out.writeObject(orders);
+		out.writeInt(Order.getCounterState());
 		out.close();
 	}
 
@@ -140,6 +193,8 @@ public class Data {
 			User.setCounterState(in.readInt());
 			items = (Hashtable<Identity, Item>) in.readObject();
 			Item.setCounterState(in.readInt());
+			orders = (Hashtable<Identity, Order>) in.readObject();
+			Order.setCounterState(in.readInt());
 			in.close();
 			return true;
 		} catch (IOException e) {
@@ -149,13 +204,8 @@ public class Data {
 		}
 	}
 
-	public static Item getCopyItem(Identity key) {
-		Item i = items.get(key);
-		return new Item(i, key);
-	}
-
 	public static int changePassword(Identity key, String original, String newPass, String repeat) {
-		if(checkUserKey(key) == false) {
+		if (checkUserKey(key) == false) {
 			return -2;
 		}
 		User u = users.get(key);
@@ -166,7 +216,17 @@ public class Data {
 			return 1;
 		} else {
 			return -1;
-		}		
+		}
+	}
+
+	public static String generateMasterInvoice() {
+		String s = "";
+		Iterator<Identity> i = orders.keySet().iterator();
+		while (i.hasNext() == true) {
+			String si = orders.get(i.next()).toString();
+			s += si;
+		}
+		return s;
 	}
 
 }

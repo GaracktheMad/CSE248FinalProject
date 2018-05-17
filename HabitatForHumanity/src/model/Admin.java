@@ -2,7 +2,7 @@ package model;
 
 import java.util.Stack;
 
-public class Admin extends User implements ClerkPrivs, AdminPrivs, ReadOnlyPrivs {
+public class Admin extends User implements ClerkPrivs, AdminPrivs, ReadOnlyPrivs, OrderManipulationPrivs {
 
 	/**
 	 * 
@@ -14,7 +14,7 @@ public class Admin extends User implements ClerkPrivs, AdminPrivs, ReadOnlyPrivs
 	}
 
 	public Admin(User a, Identity key) {
-		super(a.getName(), a.getPassword(), key);
+		super(a.getName(), a.getPassword(), key, a.getOrderList());
 	}
 	
 	/**

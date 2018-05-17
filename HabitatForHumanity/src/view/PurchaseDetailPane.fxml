@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PurchaseDetailPaneController">
+   <children>
+      <BorderPane prefWidth="450.0">
+         <center>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="25.0">
+                     <children>
+                        <Label text="Order Number" />
+                        <TextField fx:id="orderNumber" editable="false" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="30.0" layoutY="160.0" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+                     <children>
+                        <Label layoutX="10.0" layoutY="10.0" text="Item ID" />
+                        <TextField fx:id="itemField" editable="false" layoutX="38.0" layoutY="10.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="31.0">
+                     <children>
+                        <Label text="Price" />
+                        <TextField fx:id="priceField" editable="false" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="30.0" layoutY="144.0" prefHeight="100.0" prefWidth="200.0" spacing="31.0">
+                     <children>
+                        <Label text="Quantity" />
+                        <TextField fx:id="quantityField" editable="false" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="30.0" layoutY="130.0" prefHeight="100.0" prefWidth="200.0" spacing="31.0">
+                     <children>
+                        <Label text="Status" />
+                        <TextField fx:id="status" editable="false" />
+                     </children>
+                  </HBox>
+                  <HBox fx:id="personDisplay" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" spacing="15.0" visible="false">
+                     <children>
+                        <Label layoutX="10.0" layoutY="10.0" text="Orderer's ID" />
+                        <TextField fx:id="idField" editable="false" layoutX="38.0" layoutY="10.0" />
+                        <Button fx:id="completionBtn" mnemonicParsing="false" onAction="#completeToggle" text="Toggle completion" />
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </VBox>
+         </center>
+         <top>
+            <HBox alignment="TOP_CENTER" nodeOrientation="RIGHT_TO_LEFT" spacing="25.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="homeBtn" mnemonicParsing="false" onAction="#goHome" text="Home" />
+                  <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#deleteThis" text="Cancel Order" />
+                  <Button fx:id="backBtn" mnemonicParsing="false" onAction="#goBack" text="Back" />
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="20.0" top="10.0" />
+               </BorderPane.margin>
+            </HBox>
+         </top>
+         <bottom>
+            <VBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
+               <children>
+                  <Label alignment="CENTER" text="Invoice" />
+                  <TextArea fx:id="invoiceField" editable="false" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <BorderPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" />
+               </BorderPane.margin>
+            </VBox>
+         </bottom>
+      </BorderPane>
+   </children>
+</StackPane>

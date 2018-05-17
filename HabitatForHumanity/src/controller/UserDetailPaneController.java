@@ -10,9 +10,11 @@ import model.AdminPrivs;
 import model.Clerk;
 import model.Data;
 import model.Identity;
+import model.InvalidListTypeException;
 import model.ReadOnly;
 import model.User;
 import view.FXMLLoadingController;
+
 import java.io.IOException;
 import java.util.Stack;
 import javafx.event.ActionEvent;
@@ -64,8 +66,10 @@ public class UserDetailPaneController {
 	void deleteThis(ActionEvent event) {
 		CurrentUserController.userIsAdmin().removeUser(identity);
 		try {
-			FXMLLoadingController.list(false);
+			FXMLLoadingController.list("Users");
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InvalidListTypeException e) {
 			e.printStackTrace();
 		}
 	}
@@ -82,8 +86,10 @@ public class UserDetailPaneController {
 	@FXML
 	void returnToList(ActionEvent event) {
 		try {
-			FXMLLoadingController.list(false);
+			FXMLLoadingController.list("Users");
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InvalidListTypeException e) {
 			e.printStackTrace();
 		}
 	}
@@ -140,9 +146,9 @@ public class UserDetailPaneController {
 
 	void init() {
 		Stack<String> userItems = Data.getCopyUser(identity).details();
-		idField.setText(userItems.pop());
-		emailField.setText(userItems.pop());
 		rankField.setText(userItems.pop());
+		emailField.setText(userItems.pop());
+		idField.setText(userItems.pop());
 		if (CurrentUserController.getID().equals(identity)) {
 			sameAsUser = true;
 		}

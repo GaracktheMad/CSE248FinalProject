@@ -47,18 +47,27 @@
             </VBox>
          </center>
          <top>
-            <HBox alignment="TOP_CENTER" nodeOrientation="RIGHT_TO_LEFT" spacing="25.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Button fx:id="deleteBtn" disable="true" mnemonicParsing="false" onAction="#deleteThis" text="Delete" visible="false" />
-                  <Button fx:id="homeBtn" mnemonicParsing="false" onAction="#goHome" text="Home" />
-                  <Button fx:id="editBtn" alignment="TOP_RIGHT" disable="true" mnemonicParsing="false" onAction="#edit" text="Edit" visible="false" />
-                  <Button fx:id="backBtn" mnemonicParsing="false" onAction="#goBack" text="Back" />
-                  <Button fx:id="setImageBtn" disable="true" mnemonicParsing="false" onAction="#setImage" text="Set Image" visible="false" />
-               </children>
+            <VBox alignment="CENTER" spacing="8.0" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets bottom="20.0" top="10.0" />
                </BorderPane.margin>
-            </HBox>
+               <children>
+                  <HBox alignment="TOP_CENTER" nodeOrientation="RIGHT_TO_LEFT" spacing="25.0">
+                     <children>
+                        <Button fx:id="deleteBtn" disable="true" mnemonicParsing="false" onAction="#deleteThis" text="Delete" visible="false" />
+                        <Button fx:id="homeBtn" mnemonicParsing="false" onAction="#goHome" text="Home" />
+                        <Button fx:id="editBtn" alignment="TOP_RIGHT" disable="true" mnemonicParsing="false" onAction="#edit" text="Edit" visible="false" />
+                        <Button fx:id="backBtn" mnemonicParsing="false" onAction="#goBack" text="Back" />
+                        <Button fx:id="setImageBtn" disable="true" mnemonicParsing="false" onAction="#setImage" text="Set Image" visible="false" />
+                     </children>
+                  </HBox>
+                  <Button fx:id="orderBtn" alignment="CENTER" mnemonicParsing="false" onAction="#order" text="Order Item">
+                     <VBox.margin>
+                        <Insets left="8.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
          </top>
          <right>
             <ImageView fx:id="imgField" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />

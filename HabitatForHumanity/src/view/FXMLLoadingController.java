@@ -5,6 +5,8 @@ import controller.CurrentUserController;
 import controller.ItemDetailPaneController;
 import controller.ListController;
 import controller.PopupController;
+import controller.PurchaseController;
+import controller.PurchaseDetailPaneController;
 import controller.UserDetailPaneController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,6 +14,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import model.Data;
 import model.Identity;
+import model.InvalidListTypeException;
 
 public class FXMLLoadingController {
 
@@ -64,15 +67,11 @@ public class FXMLLoadingController {
 		}
 	}
 
-	public static void list(boolean isItemList) throws IOException {
+	public static void list(String listType) throws IOException, InvalidListTypeException {
 		FXMLLoader loader = new FXMLLoader(FXMLLoadingController.class.getResource("List.fxml"));
 		StackPane sp = loader.load();
 		ListController ctrl = loader.getController();
-		if (isItemList == false && CurrentUserController.getRank().equals("Admin")) {
-			ctrl.setItemList(isItemList);
-		} else {
-			ctrl.setItemList(true);
-		}
+		ctrl.setItemList(listType);
 		updateStage(sp);
 	}
 
@@ -81,8 +80,8 @@ public class FXMLLoadingController {
 		updateStage(sp);
 	}
 
-	public static void detail(Identity identity, boolean isItemList) {
-		if (isItemList == false && CurrentUserController.getRank().equals("Admin")) {
+	public static void detail(Identity identity, String listType) {
+		if (listType.equalsIgnoreCase("Users") && CurrentUserController.getRank().equals("Admin")) {
 			FXMLLoader loader = new FXMLLoader(FXMLLoadingController.class.getResource("UserDetailPane.fxml"));
 			try {
 				StackPane sp = loader.load();
@@ -92,12 +91,22 @@ public class FXMLLoadingController {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		} else {
+		} else if(listType.equalsIgnoreCase("Items")) {
 			FXMLLoader loader = new FXMLLoader(FXMLLoadingController.class.getResource("ItemDetailPane.fxml"));
 			try {
 				StackPane sp = loader.load();
 				ItemDetailPaneController ctrl = loader.getController();
 				ctrl.data(identity, stage);
+				updateStage(sp);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}else if(listType.equalsIgnoreCase("orders") || listType.equalsIgnoreCase("my orders")) {
+			FXMLLoader loader = new FXMLLoader(FXMLLoadingController.class.getResource("PurchaseDetailPane.fxml"));
+			try {
+				StackPane sp = loader.load();
+				PurchaseDetailPaneController ctrl = loader.getController();
+				ctrl.data(identity, listType);
 				updateStage(sp);
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -122,6 +131,22 @@ public class FXMLLoadingController {
 	public static void createItem() throws IOException {
 		StackPane sp = FXMLLoader.load(FXMLLoadingController.class.getResource("CreateItem.fxml"));
 		updateStage(sp);
+	}
+
+	public static void invoiceGen() throws IOException {
+		StackPane sp = FXMLLoader.load(FXMLLoadingController.class.getResource("GenerateInvoice.fxml"));
+		updateStage(sp);
+	}
+
+	public static void order(Identity identity) {
+		FXMLLoader loader = new FXMLLoader(FXMLLoadingController.class.getResource("Purchase.fxml"));
+		try {
+			StackPane sp = loader.load();
+			PurchaseController ctrl = loader.getController();
+			ctrl.data(identity);			updateStage(sp);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
